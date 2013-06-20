@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Getting started with R</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="A quick and simple intro to R">
+  <meta name="generator" content="bookdown 0.0.72 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Getting started with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A quick and simple intro to R" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Getting started with R" />
+  
+  <meta name="twitter:description" content="A quick and simple intro to R" />
+  
+
+<meta name="author" content="Matthew Upson">
+
+<meta name="date" content="2016-06-15">
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+
+<link rel="next" href="R-environment.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Course info</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#course-materials-and-structure"><i class="fa fa-check"></i><b>1.1</b> Course materials and structure</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#structure"><i class="fa fa-check"></i><b>1.2</b> Structure</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#navigating-the-course"><i class="fa fa-check"></i><b>1.2.1</b> Navigating the course</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#getting-help"><i class="fa fa-check"></i><b>1.3</b> Getting help</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#within-r"><i class="fa fa-check"></i><b>1.3.1</b> Within R</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#books-and-guides"><i class="fa fa-check"></i><b>1.3.2</b> Books and guides</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#forums"><i class="fa fa-check"></i><b>1.3.3</b> Forums</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="R-environment.html"><a href="R-environment.html"><i class="fa fa-check"></i><b>2</b> The R environment</a></li>
+<li class="chapter" data-level="3" data-path="R-style.html"><a href="R-style.html"><i class="fa fa-check"></i><b>3</b> R coding style</a></li>
+<li class="chapter" data-level="4" data-path="installing-r-packages.html"><a href="installing-r-packages.html"><i class="fa fa-check"></i><b>4</b> Installing R Packages</a></li>
+<li class="chapter" data-level="5" data-path="getting-data-into-R.html"><a href="getting-data-into-R.html"><i class="fa fa-check"></i><b>5</b> Getting data into R</a></li>
+<li class="chapter" data-level="6" data-path="selecting-data.html"><a href="selecting-data.html"><i class="fa fa-check"></i><b>6</b> Selecting data</a></li>
+<li class="chapter" data-level="7" data-path="scatter-plots.html"><a href="scatter-plots.html"><i class="fa fa-check"></i><b>7</b> Scatter-plots</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Getting started with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Getting started with R</h1>
+<h4 class="author"><em>Matthew Upson</em></h4>
+<h4 class="date"><em>2016-06-15</em></h4>
+</div>
+<div id="course-info" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> Course info</h1>
+<p>This course was originally delivered in 2012 for a class of researchers and research students at Cranfield University, most with little or no experience of R. As I have continued to teach R in various capacities ever since, I have updated this course to provide more up-to-date material for those coming to R for teh first time in 2016.</p>
+<p>The aim of this course remains the same as the original:</p>
+<blockquote>
+<p>This course is designed to give you a brief introduction to the statistical programming environment R. <em>This is not a course on which statistics to use and why</em>, it is primarily concerned with getting you started with the R language, and as such assumes a basic levels of statistical knowledge.</p>
+</blockquote>
+<p>In its previous incarnation, this book relied on examples from Mick Crawley’s seminal text’The R Book’. This course relies less on that book, and although a little dated now, it remains ane excellent resource, especially when using R for generalised linear modelling.</p>
+<div id="course-materials-and-structure" class="section level2">
+<h2><span class="header-section-number">1.1</span> Course materials and structure</h2>
+<p>All the course materials are available here. In addition you will need to download data from the internet for certain exercises, but this will be explained to you in the appropriate section.</p>
+</div>
+<div id="structure" class="section level2">
+<h2><span class="header-section-number">1.2</span> Structure</h2>
+<p>The course is divided as follows:</p>
+<ul>
+<li>Getting started
+<ul>
+<li>The R environment</li>
+<li>RStudio</li>
+<li>R coding style</li>
+<li>Installing R packages</li>
+</ul></li>
+<li>Moving data around
+<ul>
+<li>Getting data into R</li>
+<li>Selecting Data</li>
+<li>Data structures and types</li>
+</ul></li>
+<li>Visualising your data
+<ul>
+<li>Scatter-plots</li>
+<li>Histograms and Box-and-whisker plots</li>
+<li>Multiple plots</li>
+</ul></li>
+<li>Basic data analysis
+<ul>
+<li>T-test</li>
+<li>Linear regression</li>
+<li>ANOVA</li>
+</ul></li>
+<li>More advanced stuff…
+<ul>
+<li>Writing functions</li>
+</ul></li>
+</ul>
+<p>As you go along, You will be able to copy and paste the code from these notes directly into the <code>R</code> console., but do try to understand what it is you are doing!</p>
+<p>In addition there are a number of exercises throughout. These are indicated by a box:</p>
+<div id="navigating-the-course" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> Navigating the course</h3>
+<p>Follow the links on the left hand pane to get around.</p>
+</div>
+</div>
+<div id="getting-help" class="section level2">
+<h2><span class="header-section-number">1.3</span> Getting help</h2>
+<p>Getting help with R is very easy - there is a thriving online community of R users who, so the chances are that if you have a problem, someone else will have posted a solution online before you.</p>
+<div id="within-r" class="section level3">
+<h3><span class="header-section-number">1.3.1</span> Within R</h3>
+<p>It is possible to get help in R itself. If you are interested in a function, you can simply type the name of that function into the console preceded by a question mark. This will bring up the relevant help file - although they are not always that easy to decipher!</p>
+</div>
+<div id="books-and-guides" class="section level3">
+<h3><span class="header-section-number">1.3.2</span> Books and guides</h3>
+<p>There are also many online guides available - googling ‘R guide’ will reveal many, but three are listed below:</p>
+<ul>
+<li><a href="http://www.rstudio.com/ide/docs/help_with_r" class="uri">http://www.rstudio.com/ide/docs/help_with_r</a> <em><a href="http://cran.r-project.org/doc/contrib/Owen-TheRGuide.pdf" class="uri">http://cran.r-project.org/doc/contrib/Owen-TheRGuide.pdf</a> </em><a href="https://sites.google.com/site/undergraduateguidetor">https://sites.google.com/site/undergraduateguidetor/</a></li>
+</ul>
+<p>I point the reader particularly in the direction of:</p>
+<ul>
+<li><a href="http://adv-r.had.co.nz/">Advanced R</a></li>
+<li><a href="http://r4ds.had.co.nz/">R for Data Science</a></li>
+</ul>
+</div>
+<div id="forums" class="section level3">
+<h3><span class="header-section-number">1.3.3</span> Forums</h3>
+<p>Forums are a great place for R help - again try googling this, although one of the most well known is: <a href="http://stats.stackexchange.com/" class="uri">http://stats.stackexchange.com/</a>. Just make sure you read the rules of the forum carefully, as contributors often don’t take kindly to poorly stated questions!</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="R-environment.html" class="navigation navigation-next navigation-unique" aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

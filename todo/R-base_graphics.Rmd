@@ -1,0 +1,313 @@
+<html>
+
+<head>
+<title>Getting Started with R - R-base graphics</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+
+</head>
+
+<body>
+
+# R-base graphics 
+
+R-base is the basic set of functiosn that come with R as standard - before you start to download any additional packages. The graphics functions included in R-base are simple, but also highly customisable, and capable of producing high standard, publication quality graphics.
+
+There are otehr graphics packages which offer more advanced graphical functions like *ggplot2*, these will not be covered in this course.
+
+## Producing a basic plot 
+
+The basic plotting functions are very easy, but we first need some data to work with. We'll refer to some of the data used in the R book again.
+
+As before, we import directly from an online text file
+
+<!--begin.rcode
+sapdecay <- read.table(
+     "http://www.bio.ic.ac.uk/research/mjcraw/therbook/data/sapdecay.txt", 
+     header=T
+     )
+end.rcode-->
+
+ We'll call the data to examine it. Note this data is dealt with on p70 of 'The R Book'. remember that typing the name of the object <tt>sapdecay</tt> is the 'short-hand' equivalent of typing <tt>print(sapdecay)</tt> - there are certain occasions when it will be necessary to use the full command - more of that later.
+
+<!--begin.rcode
+sapdecay
+end.rcode-->
+
+So, we have two columns of data, which we will plota aginst each other - this is very simple
+
+<!--begin.rcode
+plot(sapdecay)
+end.rcode-->
+
+In this example, R recognises that there are two columns in the object sapdecay, and it simply plots them against each other. This kind of command is called a lazy command, because we have not specified any of the arguments explicitly.
+
+The long version would be:
+
+<!--begin.rcode
+plot(
+     x = sapdecay$x,
+     y = sapdecay$y
+     )
+
+# Note that we can also dispence with the sapdecay$ by using the with() command:
+
+with(
+     sapdecay,
+     plot(
+          x = x,
+          y = y
+          )
+     )
+     
+
+end.rcode-->
+
+This isn't a particularly inspiring plot, so let's make it look a little better...
+
+First let's make it a little easier to see al the changes that we are making
+
+<!--begin.rcode
+
+
+# First let's make it a little easier to see al the changes that we are making
+
+par(mfrow = c(2,2)) 
+
+# This command splits the plotting area into four, so we can see four plots side
+# by side. We'll cover the par command in more detail in the next section. We
+# then simply make four plots, one after the other, and they will fill up the
+# plotting area.
+
+with(
+     sapdecay,
+     plot(
+          x = x,
+          y = y,
+          xlab = "Time (hours)",
+          ylab = "Decay rate",
+          type = "l",
+          col = "red",
+          lwd = 2,
+          main = "Line"
+          )
+     )
+
+with(
+     sapdecay,
+     plot(
+          x = x,
+          y = y,
+          xlab = "Time (hours)",
+          ylab = "Decay rate",
+          type = "o",
+          col = "green",
+          lwd = 1,
+          main = "Overplot"
+          )
+     )
+
+with(
+     sapdecay,
+     plot(
+          x = x,
+          y = y,
+          xlab = "Time (hours)",
+          ylab = "Decay rate",
+          type = "h",
+          col = "blue",
+          lwd = 2,
+          main = "Histogram"
+          )
+     )
+
+with(
+     sapdecay,
+     plot(
+          x = x,
+          y = y,
+          xlab = "Time (hours)",
+          ylab = "Decay rate",
+          type = "s",
+          col = "hotpink",
+          lwd = 2,
+          main = "Step"
+          )
+     )
+
+# It's important that we reset the mfrow parameter at the end of plotting,
+# otherwise all subsequent plots will apear on this four by four grid, which may
+# not be what we want.
+
+par(mfrow = c(1,1))
+
+end.rcode-->
+
+Using this method, it's also perfectly possible to combine plots of two different types, and plot them next to each other.
+
+Let's imagine that we want to test whether a variable is normally distributed - there are two very simple graphical commands built into R that make this easier: <tt>qqnorm</tt> and <tt>qqplot</tt>. These commands produce quantile-quantile plots for the normal distribution. Essentially if the data are normally distributed, they will conform to the straight line<a href="#footnote-1">[1]</a>.
+
+First we will create a vector of random numbers drawn from a normal distribution - so we already know that they are normal!
+
+<!--begin.rcode
+normal_data <- rnorm(100,mean=0,sd=1)
+
+normal_data
+end.rcode-->
+
+And now...some plots. First, two plots side by side.
+
+<!--begin.rcode
+
+par(mfrow=c(1,2)) 
+
+# Remember that the first number is the number of rows, the latter is the number
+# of columns. So here, we have specified one row, two columns...
+
+# Now the plots:
+
+hist(normal_data)
+
+qqnorm(normal_data)
+qqline(normal_data)
+end.rcode-->
+
+So things should look pretty normal. In this example we have not specified a 'seed' (see <tt>?set.seed</tt> for more info). So every time that you run the code, you will get a different set of randomly generated numbers drawn from a normal distribution.
+
+All well and good, but what about one above the other? Just changed the one and 2 around in the <tt>par(mfrow=c(x,y))</tt> command.
+
+<!--begin.rcode
+
+par(mfrow=c(2,1)) 
+
+# Remember that the first number is the number of rows, the latter is the number
+# of columns. So here, we have specified one row, two columns...
+
+# Now the plots:
+
+hist(normal_data)
+
+qqnorm(normal_data)
+qqline(normal_data)
+end.rcode-->
+
+Easy right?
+
+## Customising your plots 
+
+There are a number of arguments that can be passed to the plot commands in order to customise your plots. The below list is lifted from the help file for the <tt>?plot.default</tt> command. You can normally get similar lists of possible arguments for other commands: e.g. <tt>?hist</tt>.
+
+### Arguments 
+
+<table summary="R argblock">
+<tr valign="top"><td><code>type</code></td>
+<td>
+1-character string giving the type of plot desired.  The
+following values are possible, for details, see <code>plot</code>:
+<code>""</code> for points, <code>"l"</code> for lines,
+<code>"b"</code> for both points and lines,
+<code>"c"</code> for empty points joined by lines,
+<code>"o"</code> for overplotted points and lines,
+<code>"s"</code> and <code>"S"</code> for stair steps and
+<code>"h"</code> for histogram-like vertical lines.  Finally,
+<code>"n"</code> does not produce any points or lines.
+</td></tr>
+<tr valign="top"><td><code>xlim</code></td>
+<td>
+the x limits (x1, x2) of the plot.  Note that <code>x1 &gt; x2</code>
+is allowed and leads to a &lsquo;reversed axis&rsquo;.
+
+The default value, <code>NULL</code>, indicates that the range of the finite values to be plotted should be used.
+</td></tr>
+<tr valign="top"><td><code>ylim</code></td>
+<td>
+the y limits of the plot.
+</td></tr>
+<tr valign="top"><td><code>log</code></td>
+<td>
+a character string which contains <code>"x"</code> if the x axis
+is to be logarithmic, <code>"y"</code> if the y axis is to be logarithmic
+and <code>"xy"</code> or <code>"yx"</code> if both axes are to be logarithmic.
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+a main title for the plot, see also <code>title</code>.
+</td></tr>
+<tr valign="top"><td><code>sub</code></td>
+<td>
+a sub title for the plot.
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+a label for the x axis, defaults to a description of <code>x</code>.
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+a label for the y axis, defaults to a description of <code>y</code>.
+</td></tr>
+<tr valign="top"><td><code>ann</code></td>
+<td>
+a logical value indicating whether the default annotation
+(title and x and y axis labels) should appear on the plot.
+</td></tr>
+<tr valign="top"><td><code>axes</code></td>
+<td>
+a logical value indicating whether both axes should be drawn on
+the plot.  Use graphical parameter <code>"xaxt"</code> or <code>"yaxt"</code>
+to suppress just one of the axes.
+</td></tr>
+<tr valign="top"><td><code>frame.plot</code></td>
+<td>
+a logical indicating whether a box should be drawn
+around the plot.
+</td></tr>
+<tr valign="top"><td><code>panel.first</code></td>
+<td>
+an &lsquo;expression&rsquo; to be evaluated after the
+plot axes are set up but before any plotting takes place.  This can
+be useful for drawing background grids or scatterplot smooths.  Note
+that this works by lazy evaluation: passing this argument from other
+<code>plot</code> methods may well not work since it may be evaluated too
+early.
+</td></tr>
+<tr valign="top"><td><code>panel.last</code></td>
+<td>
+an expression to be evaluated after plotting has
+taken place but before the axes, title and box are added.  See the
+comments about <code>panel.first</code>.
+</td></tr>
+<tr valign="top"><td><code>asp</code></td>
+<td>
+the <i>y/x</i> aspect ratio, see <code>plot.window</code>.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+other graphical parameters (see <code>par</code> and
+section &lsquo;Details&rsquo; below).
+</td></tr>
+</table>
+
+
+<div class="ex">
+
+## Exercise 
+
+If you have time, try customising some of the previous plots by altering some of these arguments for yourself...
+
+Below is a plot produced using the <tt>normal_data</tt> vector we produced earlier. See if you can reproduce it by changing the arguments listed above.
+
+<!--begin.rcode echo=FALSE,fig.height=6
+plot(normal_data)
+end.rcode-->
+
+
+</div>
+
+
+<br><br>
+<hr>
+
+< id="footnote-1">[1] I'm not going to dwell on the reasons why this is so - we're more interested in the plotting graphs than the statistics behind it in this sections, but if you don't understand what is going on here, you should look it! <a href="http://en.wikipedia.org/wiki/Q%E2%80%93Q_plot">http://en.wikipedia.org/wiki/Q-Q_plot</a>.
+
+</body>
+
+</html>

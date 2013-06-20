@@ -1,0 +1,146 @@
+<html>
+
+<head>
+<title>Getting Started with R - Scatterplots</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+
+</head>
+
+<body>
+
+## The par command 
+
+The <tt>par</tt> command is used to customise graphical parameters for all plots drawn subsequently. Typically you might adjust the amount of space around a plot, the size of the text, the thickness of lines, etc.
+
+If these are not the sort of things that usually bother you, you can skip this section without too much worry. However, you will occasionally come across something that cannot be done with a regular plotting function, in which case you may need to use <tt>par</tt>.
+
+### Some examples 
+
+It would be fruitless trying to demonstrate the use of all the <tt>par</tt> commands, instead you should refer to the <tt>?par</tt> help file.
+
+What is shown here are some ways to simplify your usage of the <tt>par</tt> command.
+
+Prior to editing the graphical parameters, it's a good idea to set up a list of the default parameters. That way, you can easily revert to the default. Note that this will also result if you close and re-open R - or restart R from the session drop down menu in RStudio:
+
+<img src="figure/restartR.png">
+
+A quick way of saving the default par commands is shown below - although the R help files recommend against doing it - for what reason, I am not sure!
+
+<!--begin.rcode
+original_pars <- par(no.readonly = TRUE)
+end.rcode-->
+
+It's then possible to restore the default settings by running:
+
+<!--begin.rcode
+par(original_pars)
+end.rcode-->
+
+### Some examples 
+
+
+
+op <- par(mfrow = c(2, 2), # 2 x 2 pictures on one plot
+          pty = "s")       # square plotting region,
+                           # independent of device size
+
+
+
+plot_pars <- function() {
+     par(
+     bty = "l", 
+     mfrow = c( 1, 1), 
+     mar = c( 4.1, 3.9, 0.5, 0.5), 
+     mgp = c( 1.95, 0.6, 0), 
+     lend  ="square", 
+     cex = 1.4, 
+     cex.axis = 1.2, 
+     cex.lab = 1.2,
+     lwd = 0.5
+     )
+     }
+
+end.rcode-->
+
+### Customising white space 
+
+So by now, you may be realising that pretty much everything in R plots can be customised. This includes the amount of whitespace you leave around your plots. This can very useful to change when you are creating two plots next to each other.
+
+I'm not going to dwell on how to do this, because there are already some excellent guides written on the internet (see: <a href="http://research.stowers-institute.org/efg/R/Graphics/Basics/mar-oma/">http://research.stowers-institute.org/efg/R/Graphics/Basics/mar-oma/</a>). One of the plots from this page is included below - maybe take a deep breath first before looking at the code on the website!
+
+<!--begin.rcode,"the_par_command-1",tidy=FALSE, echo=FALSE
+
+GenericFigure <- function(ID, size1, size2)
+{
+  plot(0:10, 0:10, type="n", xlab="X", ylab="Y")
+  text(5,5, ID, col="red", cex=size1)
+  box("plot", col="red")
+  mtext("Figure",
+        SOUTH<-1, line=3, adj=1.0, cex=size2,   col="blue")
+}
+
+
+# Figure 1.  Default R Plot Area / Figure Area
+Figure1 <- function()
+{
+  oldpar <- par(oma=c(0,0,0,0))  # default values
+  GenericFigure("Plot Area", 3,2)
+  box("figure", col="blue")
+  par(oldpar)
+}
+
+Figure2A <- function()
+{
+  par(oma=c(2,2,2,2))
+  GenericFigure("Plot Area", 3,2)
+
+  Margins <- capture.output( par()$mar )
+  Margins <- substr(Margins, 5, nchar(Margins))
+  Margins <-
+       paste("mar = c(", gsub(" ",",",Margins), ")", sep="")
+  mtext(Margins,
+        NORTH<-3, line=2, adj=0.0, cex=1.5, col="blue")
+
+  # "figure" box and "inner" margin box same for single figure plot
+  box("figure",lty="dashed", col="blue")
+  box("inner", lty="dotted", col="green")
+
+  mtext("Outer Margin Area",
+        SOUTH<-1, line=0.4, adj=1.0, cex=1.5, col="green", outer=TRUE)
+  box("outer", lty="solid", col="green")
+
+  OuterMargins <- capture.output( par()$oma )
+  OuterMargins <- substr(OuterMargins, 5, nchar(OuterMargins))
+  OuterMargins <-
+       paste("oma = c(", gsub(" ",",",OuterMargins), ")", sep="")
+  mtext(OuterMargins,
+        NORTH<-3, line=0.4, adj=0.0, cex=1.5, col="green", outer=TRUE)
+}
+
+# Figure 2B.  Additional Annotations.
+Figure2B <- function()
+{
+  Figure2A()
+
+  # Text:  one string per mtext call
+  mtext("mar[SOUTH<-1]", SOUTH<-1, at=5, line=2,    cex=1.2, col="blue")
+  mtext("mar[WEST<-2]",  WEST <-2, at=5, line=2,    cex=1.2, col="blue")
+  mtext("mar[NORTH<-3]", NORTH<-3, at=5, line=0.25, cex=1.2, col="blue")
+  mtext("mar[EAST<-4]",  EAST <-4, at=5, line=0.25, cex=1.2, col="blue")
+
+  # Text:  vector of strings in mtext call
+  mtext(c("oma[SOUTH<-1]", "oma[WEST<-2]", "oma[NORTH<-3]", "oma[EAST<-4]"),
+        c(SOUTH<-1, WEST<-2, NORTH<-3, EAST<-4),
+        line=0.4, cex=1.2, col="green", outer=TRUE)
+}
+
+Figure2B()
+end.rcode-->
+
+
+
+
+
+</body>
+
+</html>

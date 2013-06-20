@@ -1,0 +1,34 @@
+body{
+margin-top:50px;
+margin-bottom:100px;
+margin-right:100px;
+margin-left:75px;
+font-family:"Calibri","Verdana","Arial";
+}
+
+p{
+font-family:"Calibri","Verdana","Arial";
+}
+
+h1{
+font-family:"Calibri","Verdana","Arial";
+}
+
+
+h2{
+font-family:"Calibri","Verdana","Arial";
+}
+
+h3{
+font-family:"Calibri","Verdana","Arial";
+}
+
+ul{
+font-family:"Calibri","Verdana","Arial";
+}
+
+.ex{
+font-family:"Calibri","Verdana","Arial";
+background-color: #EDC9AF;
+padding: 5px;
+}

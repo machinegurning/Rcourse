@@ -1,0 +1,332 @@
+<html>
+
+<head>
+<title>Writing functions</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
+
+<body>
+
+# Writing functions 
+
+One of the great strengths of R, is that at its heart, it is a programming language, and hence has all the usual functionality one might expect from a programming language. This incldues the ability to write functions.
+
+This can be extremely useful when it comes to repetitive tasks that we have to complete time and time again. You might for example, write a function to correctly format data arriving in a raw state, for example from weather stations or from lab equipment. You might also want to complete exactly the same analysis on many subsets of a large dataset; this can easily be handled by a function or loop.
+
+## IF,IF ELSE, and FOR 
+
+Let's start with something that many Excel users will be familiar with - the IF function.
+
+If you have ever done any coding in Excel, you will probably have come across the IF() command. This command takes the form of: *IF(logical_test,[value_if_true],[value_if_false])*. The astute among you will realise that this is in effect an IF ELSE statement! An example of its usage might be:
+
+*=IF(A1>5,TRUE,FALSE)*
+
+I.e: if the value in cell A1 is greater than 5, the value in the current cell should be TRUE, and if not, the value should be FALSE - simple enough.
+
+Let's try something similar in R. In R the *if* command is composed of just two elements the logical_test, as Excel calls it (more correctly, the "condition"), and the value_if_true (or the "consequent"). The syntax looks like this: *if (condition) {consequent}*.
+
+<!--begin.rcode
+
+ x <- 9  # define object x with the value 5
+
+# try out the if statement:
+
+if (x > 5) {
+     print(TRUE)
+     }
+
+end.rcode-->
+
+So far so good...and if we want to do exactly the same thing as we did in Excel we need to add *else*.
+
+<!--begin.rcode
+
+if (x > 5) {
+     print(TRUE)
+     } else { # note that it is important that the else is on the same line as the closed curly bracket
+     print(FALSE)
+     }
+
+          
+end.rcode-->
+
+Something to note from this is example is that R recognises *TRUE* and *FALSE* as booleans, hence you don't need to use quotes. If you wanted to use a character string, you would definitely need to use quotes.
+
+
+### For loops 
+
+*For* loops are used when you need to perform the same action many times, but taking different inputs each time. You could, for instance, run the same statistical test on a several different sets of data. The example below shows a simple for loop.
+
+<!--begin.rcode
+
+# In specifying a for loop, we must define the range over which we want the loop to run.
+# In this case we use 1:10. The loop will then iterate across the sequence 1, 2, 3...etc
+# substituting i for the number of the iteration
+
+for (i in 1:10) {
+     print(
+          paste(
+               "This is iteration number", 
+               i, 
+               sep=" "
+               )
+          )
+     }
+
+
+end.rcode-->
+
+## Real world example 
+
+Now we will combine an *if else*, statement and a *for* loop in order to demonstarte the power of these tools.
+
+
+<!--begin.rcode
+
+# First generate 100 random numbers using a normal distribution using rnorm - see ?rnorm for details.
+# We set the seed to 500 first to make this example reproducible. See ?set.seed
+
+set.seed(500) 
+
+dummy <- rnorm(
+     100, 
+     mean = 10, 
+     sd = 2
+     )
+
+dummy
+
+# Now limit the data to two decimal places to make it easier to read
+
+dummy <- round(
+     dummy, 
+     digits = 2 
+     )
+
+dummy
+
+# Calculate the mean of this vector
+
+mean(dummy)
+
+# Calculate the mean of this vector
+
+sd(dummy)
+
+# Let's also plot a probability density function of this data to see what it looks like:
+
+plot(
+     density(dummy), # create density estimates for the dummy dataset
+     lwd = 2   # set the line weight to 2 pixels
+     )
+
+# and draw on the mean and mean +- standard deviation
+
+abline(
+     v = c(
+          mean(dummy),
+          mean(dummy)+sd(dummy),
+          mean(dummy)-sd(dummy)
+          ),
+     col = c("blue", "red", "red"),
+     lwd = c(3, 2, 2),
+     lty = 2
+     )
+
+
+
+end.rcode-->
+
+Now let us suppose that we wanted to know which of the values within the dummy data lie above or below 1 standard deviation of the mean. i.e. to the left (below) or to the right (above) the red dotted lines in our plot.
+
+Suppose that we also want to create vector which contained a simple 'ABOVE' or 'BELOW' to accompany it.
+
+This can be achieved with an *if else* statement nested within a *for* loop.
+
+<!--begin.rcode
+
+# First the if statement: let's start by using the last value of the dummy data:
+
+
+
+if (dummy[100] > (mean(dummy) + sd(dummy))) {
+     
+     print("ABOVE")
+     
+     } 
+
+end.rcode-->
+
+ And... nothing happens... because the last value of dummy is <!--rinline dummy[100] -->; less than the mean of dummy. But is it less than the mean - 1 standard deviation? We add an *else if* statement to decide.
+
+
+<!--begin.rcode
+
+if (dummy[100] > (mean(dummy) + sd(dummy))) {
+     
+     print("ABOVE")
+     
+     } else if (dummy[100] < (mean(dummy) - sd(dummy))) {
+          
+          print("BELOW")
+          
+          }
+
+end.rcode-->
+
+
+There is a third possibility - the values are within the red lines in our plot - i.e. within one standard deviation of the mean. We can add an else statement to deal with this eventuality too.
+
+<!--begin.rcode
+
+if (dummy[100] > (mean(dummy) + sd(dummy))) {
+     
+     print("ABOVE")
+     
+     } else if (dummy[100] < (mean(dummy) - sd(dummy))) {
+          
+          print("BELOW")
+          
+          } else
+               
+               print("WITHIN")
+
+end.rcode-->
+
+So it turns out that the first value of the dummy data is below one standard deviation of the mean.
+
+Now let's wrap the *if else* statement with a *for* loop, and run it over the whole dummy dataset.
+
+
+<!--begin.rcode
+
+# first we must specify what we want to the loop to iterate over:
+
+for (i in dummy) { # it's usual to name the indexer as i
+     
+     # we replace dummy[100] with i in both instances
+     
+     if (i > (mean(dummy) + sd(dummy))) { 
+          
+          print("ABOVE")
+          
+          } else if (i < (mean(dummy) - sd(dummy))) {
+               
+               print("BELOW")
+               
+               } else
+                    
+                    print("WITHIN")
+     
+     }
+
+end.rcode-->
+
+
+So we get a list of "ABOVE", "BELOW" or "WITHIN". To make this really useful, we should need to get the loop to produce an output. There are several ways to do this, but a simple way is shown in the next example.
+
+<!--begin.rcode
+
+# First we create a vector into which we will store the answers.
+
+dummy_sd <- vector(
+     length = 100,
+     mode = "character"
+     )
+
+
+# Instead of interating directly over the dummy vector, this time, we need to iterate over a vectore of numbers, the same length as the dummy data.
+
+for (i in 1:length(dummy)) { 
+     
+     # now we need to change i back to dummy - but use 'i' as subscript:
+     
+     if (dummy[i] > (mean(dummy) + sd(dummy))) { 
+          
+          # instead of printing the results, we assign them to a subscript within the dummy_sd vector
+          
+          dummy_sd[i] <- "ABOVE"
+          
+          } else if (dummy[i] < (mean(dummy) - sd(dummy))) {
+               
+          
+          dummy_sd[i] <- "BELOW"
+               
+               } else
+                    
+          
+          dummy_sd[i] <- "WITHIN"
+     
+     }
+
+# Check the results
+
+dummy_data <- data.frame(
+     data = dummy, 
+     sd = dummy_sd
+     )
+
+dummy_data
+
+end.rcode-->
+
+## Writing a function 
+
+Ok, so far so good, but it would be better if we could write our code in such a way that we can apply it to any vector of values, not just the one we specify..
+
+In fact, there are already functions built into R, which make the job much easier, for instance *sapply*
+
+<!--begin.rcode
+
+
+# We assign a name to the vector which our function will produce, using 'gets' (<-)
+# Then we state the vector on which we want to evaluate our function - in this case our vector of dummy values.
+
+dummy_sd1 <- sapply(dummy, 
+       
+       # then we need to wrap our for loop and if statements in a function wrapper
+       
+           function(x) {
+            
+            if (x > (mean(dummy) + sd(dummy))) { 
+                 
+                 # instead of using 'print' we just state the outcome
+                 
+                 "ABOVE"
+                 
+                 } else if (x < (mean(dummy) - sd(dummy))) {
+                      
+                      
+                      "BELOW"
+                      
+                      } else
+                           
+                           
+                           "WITHIN"
+            
+            }
+       )
+
+
+# check if the answer is the same as the previous example
+
+identical(dummy_sd,dummy_sd1)
+
+end.rcode-->
+
+
+So now, we can apply our function to 
+
+length(which(dummy > mean(dummy)))
+
+
+length(which(dummy > (mean(dummy) + sd(dummy))))/length(dummy)
+
+
+system.time()
+
+end.rcode-->
+
+
+</body>
+</html>

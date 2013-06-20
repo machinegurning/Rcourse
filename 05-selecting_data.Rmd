@@ -1,0 +1,104 @@
+# Selecting data {#selecting_data}
+
+In the previous section, we dealt a little with the question of selecting parts of your data from an imported table. We will expand on that introduction here by introducing some additional commands. For the next example, we will use the R `mtcars` dataset: 'The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973-74 models)' (see `?mtcars`).
+
+First we call and examine the data.
+
+```{r}
+mtcars
+str(mtcars)
+```
+
+So it's a reasonably complex (if short) dataset, with a number of variables that we might be interested in.
+
+Suppose we wanted to select all the cars which have 5 forward gears (the `gear` variable): there are a number of ways of doing this. We can start by selecting a 'logical' subset.
+
+```{r}
+mtcars[mtcars$gear == 5,]
+```
+
+In this example we select only the rows which match out conditions `mtcars$gear == 5`, and all the columns. We can specify a particular column  numerically if required:
+
+```{r}
+mtcars[mtcars$gear == 5,1:2]
+```
+
+We can also use the column title to select columns.
+
+```{r}
+mtcars[mtcars$gear == 5,c("mpg","gear")]
+```
+
+And we can use more than one criteria if required...
+
+```{r}
+mtcars[mtcars$mpg > 30 & mtcars$mpg < 40,c("mpg")]
+```
+
+Notice that in this example, because we specify just one column, the code outputs a vector of numbers, not a dataframe (more on this later) with row and column names.
+
+Also note that in all these examples were, rather tiresomely, have to specify `mtcars$gear`, but there is a simpler way:
+
+```{r}
+subset(
+     x = mtcars,
+     subset = mpg > 30 & mpg < 40,
+     select = mpg
+     )
+```
+
+`subset()` simplifies the syntax for logical subsets, and note that even when you select just one column, it will output column and row names.
+
+If you want to select more than one column you will need to use `c()` to concatenate a vector names:
+
+```{r}
+subset(
+     x = mtcars,
+     subset = mpg > 30 & mpg < 40,
+     select = c(mpg,gear,cyl)
+     )
+```
+
+If you omit the `select` argument, you will end up with all the columns:
+
+```{r}
+subset(
+     x = mtcars,
+     subset = mpg > 30 & mpg < 40
+     )
+```
+
+And note that you can also use `select()` to omit columns:
+
+```{r}
+subset(
+     x = mtcars,
+     subset = mpg > 30 & mpg < 40,
+     select = -c(mpg,disp,hp)
+     )
+```
+
+Or using `:` to select or deselect a range of columns:
+
+```{r}
+subset(
+     x = mtcars,
+     subset = mpg > 30 & mpg < 40,
+     select = -c(mpg:wt)
+     )
+
+subset(
+     x = mtcars,
+     subset = mpg > 30 & mpg < 40,
+     select = c(mpg:wt)
+     )
+```
+
+
+### Exercise 
+
+Using the data you imported in the last exercise on the previous page, reproduce the same answers, this time using the `subset()` methods covered on this page.
+
+i.e.:
+
+...create a summary of the last three columns,and create a new object called `maximae` including only rows `144`, `542`, `965`, `1371` and `1769`.

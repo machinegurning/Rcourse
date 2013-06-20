@@ -1,0 +1,219 @@
+<html>
+
+<head>
+<title>Getting Started with R - Getting data into R</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+
+</head>
+
+<body>
+
+# Getting data into R 
+
+Probably the first question you are likely to ask when approaching R for the first time is 'how do I get my data into R'?
+
+R is able to read directly from excel spread sheets using a number of packages, however they usually take some tweaking. In this tutorial we will restrict ourselves to importing data from 'comma separated values' (.csv) files and 'tab delimited' text files (.txt). You can create files in this format using the 'Save As' menu in Excel, or whichever spread sheet software you are using.
+
+## Small variables 
+
+Sometimes you will need to insert data into R which is small and is not stored in an external file. There are two easy ways to do this.
+
+ Note that in the following (and all subsequent code chunks) anything preceded with a # is ignored by R and referred to as a 'comment' -ignore the colour in this document it's a quirk of the software used to produce it.
+
+It is a good idea to get into the habit of commenting every few lines of code, and explain why - not necessarily how (as this will be self evident) you have written a certain line of code. It makes reading code much easier, especially if you didn't write it.
+
+In the following example we use the *c()* or concatenate function. This works exactly the same way in R as the CONCATENATE() function in Excel, which you may be familiar with. In the example that follows, we call the function *c()* and specify a number of 'arguments' which follow - in this case a string of numbers that we want to combine.
+
+Get used to the idea of calling functions like this with a number of arguments following - we will do this a lot!
+
+<!--begin.rcode
+
+# Create an object called short_variable, and assign a series of numbers to it.
+
+# We use '<-' to create the object. This is called 'gets'.
+
+short_variable <- c(1,5,6,7,9,2,10)
+
+# To see what is contained within an object, simply input the name of the object.
+
+short_variable
+
+# Note that this the equivalent in R of writing print(short_variable).
+# This is not particularly important in this course, but it becomes important
+# as you begin to write your own functions.
+
+print(short_variable)
+
+# A more convenient way of entering a series of numbers is to use the scan() function.
+# You must still assign a name to the object you are creating as before, but scan()
+# Will allow you to enter the data more easily. 
+
+#Try that now.
+
+end.rcode-->
+
+## Importing from the clipboard 
+
+It is possible to import data from R directly from the clipboard - having just copied a table from a spreadsheet. Simply select the table of interest and copy it to clipboard as usual (Ctrl + C). The following code will then allow you to paste the table directly into R.
+
+<!--begin.rcode, eval=FALSE
+
+# The line header = T  tells R that you have copied the column headers with the data too.
+
+new_table <- read.table("clipboard", header = T)
+
+end.rcode-->
+
+If you copy direct from excel, this should work, but you may also want to copy from a 'comma separated values' file (.csv), in which case you need to tell R using the argument *sep = ","*, or equivalent.
+
+Whilst this is an easy way of getting data into R, I do not recommend it. Unless you then plan on re-saving the data using R. The problem with this kind of method, is that it is all too easy to forget exactly which spreadsheet you copied the data from. Plus it increases the number of steps required to reproduce your analysis.
+
+One solution to this, is to use R to re-save your data in a new format. This is very similar to the process of importing a new table:
+
+<!--begin.rcode, eval=FALSE
+
+write.table(new_table, "C:/data/new_table.csv", sep = ",", row.names = FALSE)
+
+end.rcode-->
+
+In this example, we save the data to a location o C:/ drive, and we specify that the file is separated by commas. We also ask R to remove the row names - by default it usually includes a column of row names, which can make the file difficult to read in other programs.
+
+In the next section we will see how to import files like the one we have just produced. 
+
+
+## Importing tables from files 
+
+Obviously you won't want to manually input all your data, it is much easier to import from a file which you have prepared in a spread sheet. As mentioned, in this course we will work exclusively with the simple formats '.csv' and .txt.
+
+When importing data from files, there are a few rules that must be adhered to, otherwise R will throw up an error.
+
+
+*  Data must be complete. Any missing values should be replaced with NA.
+*  There must be no spaces in text (e.g. column titles), you should either use underscores, e.g.: my_variable, or conflate words using capitals to separate, e.g.: myVariable.
+*  Data should be arranged in 'long' format and be 'tidy'. This is required for many types of analysis in R - a good paper on this can be found <a href="http://vita.had.co.nz/papers/tidy-data.pdf">here</a> - more on this later.
+
+
+Let's assume we've done that already:
+
+<!--begin.rcode
+
+# To import from a '.txt' file we used the read.table() function
+# again you must assign the function a name first. In this case we will import a data file
+# referred to in 'The R book'. Notice that we are able to import it directly from
+# the internet, but the location could just as easily be a local folder: "C://data/"
+
+rats <- read.table("http://www.bio.ic.ac.uk/research/mjcraw/therbook/data/rats.txt", header=T)
+
+# Call the data to examine it. Note this data is dealt with on p475 of 'The R Book'
+
+rats
+
+end.rcode-->
+
+This isn't a particularly big table so we can view the whole thing at once, but if it was longer we might want to summarise the data or look at smaller chunks of it.
+
+<!--begin.rcode
+# we can look at the first 6 rows with:
+
+head(rats)
+
+
+# Or the last 6 rows with:
+
+tail(rats)
+
+# We can select individual columns or rows with square brackets. rats[1,1] will give you the value on the first row of the first column:
+
+rats[1,1]
+
+# The first number denotes row, the second column. So to see the whole first row, we do:
+
+rats[1,]
+
+# We can also specify a series by using a colon:
+
+rats[1:10,]
+
+# If we wanted every third row, we could use the seq() function:
+
+rats[seq(3,36,3),]
+
+# In this case the three arguments in the seq function mean: start at value 3, end at value 36, and jump 3 rows at a time. 
+
+# We can also compute some summary statistics from the data:
+
+summary(rats)
+
+# Or look at the structure of the object
+
+str(rats)
+
+end.rcode-->
+
+ *str()* is useful, because it lets us know how R is seeing the parts of this table. *int* for instance means integer. If we were wanting to conduct an ANOVA on the rats data, we would need to tell R that Treatment, Rat and, Liver are categorical values, not continuous, otherwise we would be doing the wrong analysis. Note that R will always assume integers to be continuous, unless we explicitly tell it otherwise by labeling it as a *factor*.
+
+
+<!--begin.rcode
+# To solve this, either use characters - A, B, C instead of 1, 2, 3 for factors, or convert them manually:
+
+rats$Treatment <- factor(rats$Treatment)
+
+# By using the factor command, we in effect convert a continuous variable into a categorical one:
+
+str(rats)
+
+end.rcode-->
+
+Now convert Rat and Liver into categorical variables in the same way - we will need this data later.
+
+<!--begin.rcode,eval=TRUE,include=FALSE
+
+rats$Rat <- factor(rats$Rat)
+rats$Liver <- factor(rats$Liver)
+
+end.rcode-->
+
+There is a dedicated function *revalue()* to convert numerical factor levels to character based levels in the library *plyr*. This can save you the hassle of using *factor()* each time you open a dataset (although you could of course do this in your spreadsheet).
+
+
+
+<!--begin.rcode
+
+# Install the package plyr - if you don't have it already - note you can check this on the right hand 'packages' tab of RStudio. But, it doesn't hurt to run the command again, even if it is installed!
+
+install.packages('plyr',repos="http://cran.rstudio.com/")
+
+# Load the package:
+
+library(plyr)
+
+rats$Treatment1 <- revalue(rats$Treatment, c("1" = "A", "2" = "B", "3" = "C"))
+
+rats$Treatment
+rats$Treatment1
+
+end.rcode-->
+
+
+Note that in these two examples we refer to the individual columns of the table with a *$*. R studio is great for this. Type *rats$* in the console and the press the tab button. RStudio will then automatically complete the variable name, or give you the options available. Try it.
+
+We could also have referred to the columns by number: *rats[ ,1]*.
+
+Another option which gives you a much more familiar spread sheet like view is *fix(rats)* - try this too.
+
+If you have followed the above instructions, you should have something that looks like this:
+
+<!--begin.rcode
+str(rats)
+
+rats
+end.rcode-->
+
+
+
+Note that a longer discussion of getting data from excel files is available here: <a href="http://www.r-bloggers.com/read-excel-files-from-r/">http://www.r-bloggers.com/read-excel-files-from-r/</a>.
+
+
+</body>
+
+</html>

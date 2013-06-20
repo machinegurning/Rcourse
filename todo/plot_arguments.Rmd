@@ -1,0 +1,103 @@
+<html>
+
+<head>
+<title>Getting Started with R - Scatterplots</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+
+</head>
+
+<body style="background-color: lightgray";>
+
+#### Arguments 
+
+<table summary="R argblock">
+<tr valign="top"><td><code>type</code></td>
+<td>
+1-character string giving the type of plot desired.  The
+following values are possible, for details, see <code>plot</code>:
+<code>""</code> for points, <code>"l"</code> for lines,
+<code>"b"</code> for both points and lines,
+<code>"c"</code> for empty points joined by lines,
+<code>"o"</code> for overplotted points and lines,
+<code>"s"</code> and <code>"S"</code> for stair steps and
+<code>"h"</code> for histogram-like vertical lines.  Finally,
+<code>"n"</code> does not produce any points or lines.
+</td></tr>
+<tr valign="top"><td><code>xlim</code></td>
+<td>
+the x limits (x1, x2) of the plot.  Note that <code>x1 &gt; x2</code>
+is allowed and leads to a &lsquo;reversed axis&rsquo;.
+
+The default value, <code>NULL</code>, indicates that the range of the finite values to be plotted should be used.
+</td></tr>
+<tr valign="top"><td><code>ylim</code></td>
+<td>
+the y limits of the plot.
+</td></tr>
+<tr valign="top"><td><code>log</code></td>
+<td>
+a character string which contains <code>"x"</code> if the x axis
+is to be logarithmic, <code>"y"</code> if the y axis is to be logarithmic
+and <code>"xy"</code> or <code>"yx"</code> if both axes are to be logarithmic.
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+a main title for the plot, see also <code>title</code>.
+</td></tr>
+<tr valign="top"><td><code>sub</code></td>
+<td>
+a sub title for the plot.
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+a label for the x axis, defaults to a description of <code>x</code>.
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+a label for the y axis, defaults to a description of <code>y</code>.
+</td></tr>
+<tr valign="top"><td><code>ann</code></td>
+<td>
+a logical value indicating whether the default annotation
+(title and x and y axis labels) should appear on the plot.
+</td></tr>
+<tr valign="top"><td><code>axes</code></td>
+<td>
+a logical value indicating whether both axes should be drawn on
+the plot.  Use graphical parameter <code>"xaxt"</code> or <code>"yaxt"</code>
+to suppress just one of the axes.
+</td></tr>
+<tr valign="top"><td><code>frame.plot</code></td>
+<td>
+a logical indicating whether a box should be drawn
+around the plot.
+</td></tr>
+<tr valign="top"><td><code>panel.first</code></td>
+<td>
+an &lsquo;expression&rsquo; to be evaluated after the
+plot axes are set up but before any plotting takes place.  This can
+be useful for drawing background grids or scatterplot smooths.  Note
+that this works by lazy evaluation: passing this argument from other
+<code>plot</code> methods may well not work since it may be evaluated too
+early.
+</td></tr>
+<tr valign="top"><td><code>panel.last</code></td>
+<td>
+an expression to be evaluated after plotting has
+taken place but before the axes, title and box are added.  See the
+comments about <code>panel.first</code>.
+</td></tr>
+<tr valign="top"><td><code>asp</code></td>
+<td>
+the <i>y/x</i> aspect ratio, see <code>plot.window</code>.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+other graphical parameters (see <code>par</code> and
+section &lsquo;Details&rsquo; below).
+</td></tr>
+</table>
+
+</body>
+
+</html>

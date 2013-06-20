@@ -1,0 +1,70 @@
+<html>
+
+<head>
+<title>Getting Started with R - The R environment</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+
+</head>
+
+<body>
+
+<table align="center" width="80%">
+<tr>
+<td class="next"><a href="index.html">Previous</a></td>
+<td class="next"><a href="index.html">Course Overview</a></td>
+<td class="next"><a href="RStudio.html">Next</a></td>
+</tr>
+</table>
+
+<br><hr class="ex1"><br>
+
+# The <tt>R</tt> environment 
+
+## The <tt>R</tt> console 
+
+The first thing you will notice when you open <tt>R</tt>, is that there are not a great deal of buttons! In fact, you will be confronted by the window below or the 'R Console'. It is in this window that we can type commands, and in this window that we will get results returned
+
+<img src="screenshots/R1.png" style="width: 90%;">
+
+While we will get to the more complicated commands that you can pass to <tt>R</tt> via the console, it can also function as a high level calculator.
+
+Throughout this course, when you see text displayed like this:
+
+<!--begin.rcode
+1 + 2 + 3
+end.rcode-->
+
+This is essentially a command that has been run in the console, with lines preceded by <tt>##</tt> the response returned in the console. As you go along, you should replicate these commands by copying and pasting the commands into your console window.
+
+Note that there are all the usual functions you would expect from a good scientific calculator...and more.
+
+## The scripting window 
+
+The basic <tt>R</tt> installation allows you to write 'scripts' saved as <tt>.R</tt> files, in which you can save your code. You can open a new scripting window by going to the drop-down menu File>New script.
+
+Once here, you can write your codes, and send it to the <tt>R</tt> console by pressing CTRL + r line by line, or CTRL + a to select all and CTRL + r to run all the selected code.
+
+<img src="screenshots/R2.png" style="width: 90%;">
+
+## The plotting window 
+
+When you create a plot, a new window will open, in which your plot will appear. Every time you create a new plot, your old plot will be replaced by the new one. You can prevent this from happening, by running the command <tt>windows()</tt> (windows only!) before creating a plot, which will create a new plotting window, allowing you to keep several plots at any one time.
+
+<img src="screenshots/R3.png" style="width: 90%;">
+
+
+
+
+<br><hr class="ex1"><br>
+
+<table align="center" width="80%">
+<tr>
+<td class="next"><a href="index.html">Previous</a></td>
+<td class="next"><a href="index.html">Course Overview</a></td>
+<td class="next"><a href="RStudio.html">Next</a></td>
+</tr>
+</table>
+
+</body>
+
+</html>

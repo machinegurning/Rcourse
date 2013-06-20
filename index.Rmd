@@ -1,0 +1,86 @@
+--- 
+title: "Getting started with R"
+author: "Matthew Upson"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+#bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+description: "A quick and simple intro to R"
+---
+
+# Course info
+
+This course was originally delivered in 2012 for a class of researchers and research students at Cranfield University, most with little or no experience of R.
+As I have continued to teach R in various capacities ever since, I have updated this course to provide more up-to-date material for those coming to R for teh first time in 2016.
+
+The aim of this course remains the same as the original:
+
+> This course is designed to give you a brief introduction to the statistical programming environment R. *This is not a course on which statistics to use and why*, it is primarily concerned with getting you started with the R language, and as such assumes a basic levels of statistical knowledge.
+
+In its previous incarnation, this book relied on examples from Mick Crawley's seminal text'The R Book'.
+This course relies less on that book, and although a little dated now, it remains ane excellent resource, especially when using R for generalised linear modelling.
+
+## Course materials and structure
+
+All the course materials are available here. In addition you will need to download data from the internet for certain exercises, but this will be explained to you in the appropriate section.
+
+## Structure
+
+The course is divided as follows:
+
+* Getting started
+    * The R environment
+    * RStudio
+    * R coding style
+    * Installing R packages
+* Moving data around
+    * Getting data into R
+    * Selecting Data
+    * Data structures and types
+* Visualising your data
+    * Scatter-plots
+    * Histograms and Box-and-whisker plots
+    * Multiple plots
+* Basic data analysis
+    * T-test
+    * Linear regression
+    * ANOVA
+* More advanced stuff...
+    * Writing functions
+
+As you go along, You will be able to copy and paste the code from these notes directly into the `R` console., but do try to understand what it is you are doing! 
+
+ In addition there are a number of exercises throughout. These are indicated by a box:
+
+### Navigating the course
+
+Follow the links on the left hand pane to get around.
+
+## Getting help
+
+Getting help with R is very easy - there is a thriving online community of R users who, so the chances are that if you have a problem, someone else will have posted a solution online before you.
+
+### Within R
+
+It is possible to get help in R itself. If you are interested in a function, you can simply type the name of that function into the console preceded by a question mark. This will bring up the relevant help file - although they are not always that easy to decipher!
+
+### Books and guides
+
+There are also many online guides available - googling 'R guide' will reveal many, but three are listed below:
+
+* [http://www.rstudio.com/ide/docs/help_with_r](http://www.rstudio.com/ide/docs/help_with_r)
+*[http://cran.r-project.org/doc/contrib/Owen-TheRGuide.pdf](http://cran.r-project.org/doc/contrib/Owen-TheRGuide.pdf)
+*[https://sites.google.com/site/undergraduateguidetor/](https://sites.google.com/site/undergraduateguidetor)
+
+I point the reader particularly in the direction of: 
+
+* [Advanced R](http://adv-r.had.co.nz/)
+* [R for Data Science](http://r4ds.had.co.nz/)
+
+### Forums
+
+Forums are a great place for R help - again try googling this, although one of the most well known is: [http://stats.stackexchange.com/](http://stats.stackexchange.com/). Just make sure you read the rules of the forum carefully, as contributors often don't take kindly to poorly stated questions!
