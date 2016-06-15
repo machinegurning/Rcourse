@@ -6,7 +6,7 @@ Downloading and installing packages is a very simple procedure in R and can be d
 
 Int his instance, we specify the repository from which we will download the package - if you omitted `repos=""` then you would be asked to select a repository from a list. Rstudio's mirror is hosted by amazon, and hence, is pretty fast - so we'll use that one.
 
-```
+```{r}
 install.packages('agricolae', repos="http://cran.rstudio.com/")
 ```
 

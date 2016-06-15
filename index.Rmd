@@ -30,7 +30,7 @@ All the course materials are available here. In addition you will need to downlo
 
 ## Structure
 
-The course is divided into four main sections:
+The course is divided into five main sections:
 
 * Getting started
 * Moving data around
@@ -45,7 +45,7 @@ As you go along, You will be able to copy and paste the code from these notes di
  In addition there are a number of exercises throughout. These are indicated by a box:
 
 <div class=ex>
-*Exercise*
+**Exercise**
 
 This is an exercise
 </div>

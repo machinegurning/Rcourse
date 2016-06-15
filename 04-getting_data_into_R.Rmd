@@ -67,9 +67,9 @@ rats <- read.table(
     "http://www.bio.ic.ac.uk/research/mjcraw/therbook/data/rats.txt",
     header = T
 )
+```
 
 Noew we can call the data to examine it. Note this data is dealt with on p475 of 'The R Book'
-
 
 ```{r}
 rats
