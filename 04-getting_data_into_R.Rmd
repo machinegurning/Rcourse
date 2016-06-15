@@ -8,7 +8,7 @@ R is able to read directly from excel spread sheets using a number of packages, 
 
 Sometimes you will need to insert data into R which is small and is not stored in an external file. There are two easy wasy to do this.
 
- Note that in the following (and all subsequent code chunks) anything preceded with a # is ignored by R and referred to as a 'comment' -ignore the colour in this document it's a quirk of the software used to produce it.
+ Note that in the following (and all subsequent code chunks) anything preceded with a `#` is ignored by R and referred to as a 'comment'.
 
 It is a good idea to get into the habit of commenting every few lines of code, and explain why - not necessarily how (as this will be self evident) you have written a certain line of code. It makes reading code much easier, especially if you didn't write it.
 
@@ -33,14 +33,15 @@ short_variable
 # as you begin to write your own functions.
 
 print(short_variable)
-
-# A more convenient way of entering a series of numbers is to use the scan() function.
-# You must still assign a name to the object you are creating as before, but scan()
-# Will allow you to enter the data more easily. 
-
-#Try that now.
-
 ```
+
+<div class="ex">
+A more convenient way of entering a series of numbers is to use the `scan()` function.
+You must still assign a name to the object you are creating as before, but `scan()`
+Will allow you to enter the data more easily. 
+
+Try that now.
+</div>
 
 
 ## Importing tables 
@@ -57,34 +58,39 @@ When importing data from files, there are a few rules that must be adhered to, o
 
 Let's assume we've done that already:
 
+To import from a '.txt' file we used the read.table() function again you must assign the function a name first. In this case we will import a data file referred to in 'The R book'.
+Notice that we are able to import it directly from the internet, but the location could just as easily be a local folder: "C://data/".
+
 ```{r}
 
-# To import from a '.txt' file we used the read.table() function
-# again you must assign the function a name first. In this case we will import a data file
-# referred to in 'The R book'. Notice that we are able to import it directly from
-# the internet, but the location could just as easily be a local folder: "C://data/"
+rats <- read.table(
+    "http://www.bio.ic.ac.uk/research/mjcraw/therbook/data/rats.txt",
+    header = T
+)
 
-rats <- read.table("http://www.bio.ic.ac.uk/research/mjcraw/therbook/data/rats.txt", header=T)
+Noew we can call the data to examine it. Note this data is dealt with on p475 of 'The R Book'
 
-# Call the data to examine it. Note this data is dealt with on p475 of 'The R Book'
 
+```{r}
 rats
 
 ```
 
 This isn't a particularly big table so we can view the whole thing at once, but if it was longer we might want to summarise the data or look at smaller chunks fo it.
+We can look at the first 6 rows with `head()`:
 
 ```{r}
-
-# we can look at the first 6 rows with:
-
 head(rats)
+```
+Or the last six rows with `tail()`:
 
-# Or the last 6 rows with:
-
+```{r}
 tail(rats)
+```
+We can select individual columns or rows with square brackets.
 
-# We can select individual columns or rows with square brackets. rats[1,1] will give you the value on the first row of the first column:
+```{r}
+# rats[1,1] will give you the value on the first row of the first column:
 
 rats[1,1]
 
