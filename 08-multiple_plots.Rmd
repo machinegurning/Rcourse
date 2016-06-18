@@ -1,0 +1,315 @@
+# Multiple plots 
+
+```{r, echo=FALSE}
+sapdecay <- read.table(
+     "http://www.bio.ic.ac.uk/research/mjcraw/therbook/data/sapdecay.txt", 
+     header=T
+     )
+```
+
+You may have noticed in one of the previous examples, that two plots were produced one on top of the other. This is a pretty easy thing to accomplish.
+
+All we need to do is split the plotting area with the <tt>par(mfrow=c(x,y))</tt> command. As with subscripts, with this command <tt>x</tt> codes for the number of rows, and <tt>y</tt> represents the number of columns. Check <tt>?par</tt> for more information.
+
+
+```{r multiple_plots-1}
+
+par(mfrow = c(2,2)) 
+
+with(
+     sapdecay,
+     plot(
+          x = x,
+          y = y,
+          xlab = "Time (hours)",
+          ylab = "Decay rate",
+          type = "l",
+          col = "red",
+          lwd = 2,
+          main = "Line"
+          )
+     )
+
+with(
+     sapdecay,
+     plot(
+          x = x,
+          y = y,
+          xlab = "Time (hours)",
+          ylab = "Decay rate",
+          type = "o",
+          col = "green",
+          lwd = 1,
+          main = "Overplot"
+          )
+     )
+
+with(
+     sapdecay,
+     plot(
+          x = x,
+          y = y,
+          xlab = "Time (hours)",
+          ylab = "Decay rate",
+          type = "h",
+          col = "blue",
+          lwd = 2,
+          main = "Histogram"
+          )
+     )
+
+with(
+     sapdecay,
+     plot(
+          x = x,
+          y = y,
+          xlab = "Time (hours)",
+          ylab = "Decay rate",
+          type = "s",
+          col = "hotpink",
+          lwd = 2,
+          main = "Step"
+          )
+     )
+
+# It's important that we reset the mfrow parameter at the end of plotting, 
+# otherwise all subsequent plots will appear on this four by four grid, which
+# may not be what we want.
+
+par(mfrow = c(1,1))
+
+```
+
+Using this method, it's also perfectly possible to combine plots of two different types, and plot them next to each other.
+
+Let's imagine that we want to test whether a variable is normally distributed - there are two very simple graphical commands built into R that make this easier: <tt>qqnorm</tt> and <tt>qqline</tt>. These commands produce quantile-quantile plots for the normal distribution. Essentially if the data are normally distributed, they will conform to the straight line<a href="#footnote-1">[1]</a>.
+
+First we will create a vector of random numbers drawn from a normal distribution - so we already know that they are normal!
+
+```{r ,echo=-1,}
+set.seed(1337)
+normal_data <- rnorm(
+     100, 
+     mean=0, 
+     sd=1
+     )
+
+normal_data
+```
+
+And now...some plots. First, two plots side by side.
+
+```{r multiple_plots-2, fig.width=12}
+
+par(
+     mfrow=c(1,2)
+     ) 
+
+# Remember that the first number is the number of rows, the latter is the number
+# of columns. So here, we have specified one row, two columns...
+
+# Now the plots:
+
+hist(normal_data)
+
+qqnorm(normal_data)
+qqline(normal_data)
+```
+
+So things should look pretty normal. In this example we have not specified a 'seed' (see <tt>?set.seed</tt> for more info). So every time that you run the code, you will get a different set of randomly generated numbers drawn from a normal distribution.
+
+All well and good, but what about one above the other? Just changed the 1 and 2 around in the <tt>par(mfrow=c(x,y))</tt> command.
+
+```{r multiple_plots-3, fig.height=12}
+
+par(mfrow=c(2,1)) 
+
+# Remember that the first number is the number of rows, the latter is the number
+# of columns. So here, we have specified one row, two columns...
+
+# Now the plots:
+
+hist(normal_data)
+
+qqnorm(normal_data)
+qqline(normal_data)
+```
+
+<div class="ex">
+
+### Exercise 
+
+Using what you have learnt in the previous sections, and the data from the <tt>car_prices</tt>, have a go at reproducing the plots you see below. Most of what you need to know has been covered, though you will need to consult the help files for certain commands.
+</div>
+
+```{r multiple_plots-4, fig.width=15, fig.height=15}
+
+car_prices <- read.table(
+  "discount.csv", 
+  header = T,
+  sep = ","
+)
+
+par(
+  mar = c( 4.1, 4.5, 0.5, 0.5),
+  mgp = c( 2.1, 0.6, 0),
+  mfrow = c(2,2),
+  cex = 1.4,
+  cex.lab = 1.2,
+  cex.axis = 1.2,
+  lend="square"
+)
+
+diesel <- subset(car_prices,fuel == "diesel")
+petrol <- subset(car_prices,fuel == "petrol")
+
+p1<-hist(
+  diesel$price,
+  ylim = c(0,60),
+  col = rgb(1,0,0,0.5), # Note that the colours used must be those that allow transparency
+  main = "",
+  breaks = 8,
+  xlab = bquote(Asking~price~(10^3~"£")),
+  xlim = c(5,5500),
+  yaxt = "n",
+  xaxt = "n"
+)
+
+# plot second graph - note use of 'add = TRUE' to overlay onto the first plot
+
+p2<-hist(
+  petrol$price,
+  breaks = 8,
+  add = TRUE,
+  col = rgb(0,0,1,0.5)
+)
+
+axis(
+  side = 2,
+  at = seq(0,60,10),
+  las = 2
+)
+
+axis(
+  side = 1,
+  labels = seq(0,5,1),
+  at = seq(0,5000,1000),
+  las = 1
+)
+
+legend(
+  "topleft",
+  legend = c("Petrol","Diesel"),
+  fill = c(rgb(0,0,1,0.5),rgb(1,0,0,0.5)),
+  bty = "n"
+)
+
+
+
+boxplot(
+  split(
+    car_prices$price,
+    car_prices$fuel
+  ),
+  col = c(rgb(1,0,0,0.5),rgb(0,0,1,0.5)),
+  ylab = bquote(Asking~price~(10^3~"£")),
+  yaxt = "n"
+)
+
+axis(
+  side = 2,
+  labels = seq(0,10,1),
+  at = seq(0,10000,1000),
+  las = 2
+)
+
+
+
+with(
+  petrol,
+  plot(
+    miles,
+    price,
+    col = rgb(0,0,1,0.5),
+    ylim = c(500,5000),
+    xlim=c(20000,180000),
+    xlab = bquote(Mileage~(10^3~miles)),
+    ylab = bquote(Asking~price~(10^3~"£")),
+    yaxt = "n",
+    xaxt = "n",
+    bty = "l",
+    pch = 16,
+    cex = 1.2
+  )
+)
+
+with(
+  diesel,
+  points(
+    miles,
+    price,
+    col = rgb(1,0,0,0.5),
+    pch = 17,
+    cex = 1.2
+  )
+)
+
+axis(
+  side = 2,
+  labels = seq(0,10,1),
+  at = seq(0,10000,1000),
+  las = 2
+)
+
+axis(
+  side = 1,
+  at = seq(0,200000,20000),
+  labels = seq(0,200,20)
+)
+
+legend(
+  "topright",
+  col = c(rgb(0,0,1,0.5),rgb(1,0,0,0.5)),
+  legend = c("Petrol","Diesel"),
+  pch = c(16:17),
+  bty = "n",
+  cex = 1.2
+)
+
+
+
+###############
+
+qqnorm(
+  car_prices$miles,
+  main = "QQ plot of mileage"
+)
+
+qqline(
+  car_prices$miles,
+  col = "red",
+  lty = 2
+)
+
+# boxplot(
+#      split(
+#           car_prices$miles/car_prices$price,
+#           car_prices$fuel
+#           ),
+#      col = c(rgb(1,0,0,0.5),rgb(0,0,1,0.5)),
+#      ylab = bquote(Miles~"£"^-1),
+#      yaxt = "n"
+#      )
+
+# axis(
+#      side = 2,
+#      at = seq(0,200,40),
+#      las = 2
+# )
+
+par(mfrow=c(1,1))
+
+```
+
+
+< id="footnote-1">[1] I'm not going to dwell on the reasons why this is so - we're more interested in the plotting graphs than the statistics behind it in this sections, but if you don't understand what is going on here, you should look it up! <a href="http://en.wikipedia.org/wiki/Q%E2%80%93Q_plot">http://en.wikipedia.org/wiki/Q-Q_plot</a>.
