@@ -1,0 +1,81 @@
+# T-tests 
+
+As mentioned at the beginning of this course, I am not going to discuss which tests you should use, or why you should use them. I am simply going to show you HOW to use them in `R`
+
+When running t-tests, there is a simple, built in function we can use. See `?t.test` for more information.
+
+In this example we will use Crawley's t.test data from .296 of the R book. 
+
+```{r}
+t.test.data <- read.table(
+     "http://www.bio.ic.ac.uk/research/mjcraw/therbook/data/t.test.data.txt",
+     header = T
+     )
+
+t.test.data
+```
+
+
+Remember that we must always satisfy ourselves that the data are normally distributed before completing a t-test, if not, the assumptions of these tests do not hold. You should consider the other [assumptions](http://en.wikipedia.org/wiki/Student%27s_t-test#Assumptions) of a t-test too, before you run the test.
+
+```{r T-test1}
+gardenA <- t.test.data$gardenA
+gardenB <- t.test.data$gardenB
+
+par(mfrow=c(1,2))
+qqnorm(gardenA)
+qqline(gardenA)
+qqnorm(gardenB)
+qqline(gardenB)
+par(mfrow=c(1,1))
+```
+
+OK great...this data looks pretty normal. Let's complete the `t.test()`
+
+In this example we have assumed that the gardens are paired plots, and that we are interested in a two sided test. If you are not sure what is meant by these terms, you should read up on it before attempting to complete the test: [Wikipedia](http://en.wikipedia.org/wiki/Student%27s_t-test) is a surprisingly good resource for statistical information.
+
+
+```{r}
+t.test(
+     x = gardenA,
+     y = gardenB,
+     alternative = "two.sided",
+     paired = TRUE
+     )
+```
+
+The output gives us the test statistic, the degrees of freedom, and the -value - simple.
+
+Note that if you want to automate `t.test`, or another test, you can extract the results from the test object like so:
+
+```{r}
+example_test <-t.test(
+     x = gardenA,
+     y = gardenB,
+     alternative = "two.sided",
+     paired = TRUE
+     )
+
+example_test$statistic
+example_test$parameter
+example_test$.value
+
+```
+
+
+So yes....it appears that our two samples are significantly different, because the test statistic is greater than our critical t value. We can can calculate the critical t value to check this:
+
+```{r}
+qt(
+     0.975, # 0.975 because it is a two tailed test and 2*(1-0.975) = 0.05!          
+     df = 9
+     )
+
+# We ignore signs in a two-sided t-test, hence if the absolute value of the test
+# statistic is greater than the critical value, we reject the null hypothesis:
+
+abs(example_test$statistic) > qt(0.975,9)
+
+```
+
+Easy!

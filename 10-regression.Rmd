@@ -1,0 +1,305 @@
+# Linear regression 
+
+Linear regression can be completed in a similarly uncomplicated way in `R`. In this example, we will revisit the `trees` dataset we used earlier
+
+```{r}
+trees
+```
+
+Now let us assume that there is likely to be a correlation between `Girth` and `Volume`, and we want to examine this with a linear model.
+
+We start by plotting the data
+
+```{r regression1}
+
+with(
+     trees,
+     plot(
+          x = Girth,
+          y = Volume
+          )
+     )
+```
+
+So it looks like there is a positive relationship...let's explore this with linear regression. We specify a model formula of `Volume ~ Girth`, which means `Volume` is dependent on `Girth`.
+
+```{r}
+model <- lm(
+     formula = Volume ~ Girth,
+     data = trees
+     )
+```
+
+We must call the results of the test with `summary`.
+
+```{r}
+summary(model)
+```
+
+So we get quite a lot of output...
+
+First we are reminded of the model we called:
+
+```{r}
+model$call
+```
+
+Then we get some summary information from the residuals - the minimum, maximum, median, and the 1st and 3rd quartiles. Remember that our residuals should be normally distributed in a regression model, so we can get an initial idea of whether this is so from this summary:
+
+```{r}
+summary(model$residuals)
+```
+
+Then we get the juicy stuff...
+
+```{r}
+(summary(model))$coefficients
+```
+
+First we get the model coefficients. Note that the name of the response variable (Volume) has been replaced with `(Intercept)`, and the first value immediately to the right of this is the intercept of our regression line. The number beneath this is the slope of our regression line - hence these two can be considered as &alpha; and &beta; in the equation `y = &alpha; + &beta;x`
+
+Hence we can use them to plot the regression line represented by the model with:
+
+```{r regression2}
+     
+plot(
+     x = trees$Girth,
+     y = trees$Volume
+     )
+
+abline(
+     a = coef(model[1]),
+     b = coef(model[2]) 
+     )
+
+# Or more simply:
+
+abline(model)
+```
+
+We also get the results from t-tests on the two variables:
+
+```{r}
+(summary(model))$coefficients
+```
+
+The number of interest to us is `<0.00276**`, which tells us that there is a significant correlation (which is positive because the t value `3.272` is also positive) between `Volume` and `Girth`
+
+Other pertinent information is the r-square (R<sup>2</sup>) and adjusted-r-squared values (<span style="text-decoration: overline">R</span><sup>2</sup>). If you don't know what these are you should look them up: <http://en.wikipedia.org/wiki/R-squared>.
+
+If we want to include this information on the graph, we can:
+
+```{r regression3}
+     
+plot(
+     x = trees$Girth,
+     y = trees$Volume,
+     pch = 16,
+     col = "hotpink",
+     cex = 1.4
+     )
+
+abline(model)
+
+formula_text <- paste(
+     "y=",
+     round(coef(model)[1],2),
+     "+",
+     round(coef(model)[2],2),
+     "x, ",
+     sep=""
+     )
+
+rsquared_text = paste(
+     "=",
+     round(
+     (summary(model))$r.squared
+     ,2
+     )
+     )
+
+
+
+text(
+     substitute(
+          paste(ft, R^2, rt), 
+          list(ft=formula_text,rt = rsquared_text)
+          ),
+     x = 12,
+     y = 75
+     )
+```
+
+All good - but we do need to check the model diagnostic plots to ensure that we have met the assumptions of a linear model.
+
+```{r regression4, fig.height=25}
+par(mfrow=c(4,1))
+
+plot(model)
+
+par(mfrow=c(1,1))
+```
+
+As I keep saying, this is not a statistics course. If you don't know what you are looking at here, You should find.
+
+These plots are discussed in the R book on p.357, but in general terms the first and third plot should should look like a sky at night, without any particular patternation - and in particular the data should not be clustered in a wedge shape. The second plot should generally follow the straight line indicated - this is the same as the `qqnorm` plot discussed elsewhere in the course.
+
+## Transformation 
+
+The astute amongst you may have noticed that we could improve the fit of the model by transforming the data - probably with a log transformation.
+
+Let's try this now:
+
+```{r}
+model1 <- lm(
+     formula = log10(Volume) ~ log10(Girth),
+     data = trees
+     )
+summary(model1)
+```
+
+Yes, the R-squared is slightly better than with the transformed model. Now let's reproduce the plot, this time with log10 transformed axes:
+
+
+```{r regression5, fig.height=12}
+
+par(mfrow=c(2,1))
+
+plot(
+     x = trees$Girth,
+     y = trees$Volume,
+     pch = 16,
+     col = "hotpink",
+     cex = 1.4,
+     main = "Untransformed"
+     )
+
+abline(model)
+
+plot(
+     x = trees$Girth,
+     y = trees$Volume,
+     pch = 16,
+     col = "hotpink",
+     cex = 1.4,
+     log = "xy",
+     main = "Transformed"
+     )
+
+abline(model1)
+
+par(mfrow=c(1,1))
+
+```
+
+A nice touch when plotting data on transformed axes, is to produce a plot of the original data within the first plot with the model line plotted untransformed.
+
+```{r regression6}
+
+# Create intial plot
+
+plot(
+     x = trees$Girth,
+     y = trees$Volume,
+     pch = 16,
+     col = "hotpink",
+     cex = 1.4,
+     log = "xy",
+     main = "Volume ~ Girth ",
+     bty = "l",
+     xlab = "Girth (in)",
+     ylab = bquote(Volume~(ft^3)),
+     yaxt = "n"
+     )
+
+axis(
+     side = 2,
+     las = 2
+     )
+
+# Plot regression line
+
+abline(
+     model1,
+     lty = 2,
+     lwd = 2,
+     col = rgb(0,0,1,0.5)
+     )
+
+
+# Set up graphical parameters for sub plot see ?par
+
+par(
+     fig = c(0.6,1,0.075,0.6),  
+     new = T,
+     bty = "o",
+     cex.axis = 0.8,
+     cex.lab = 0.8,
+     mgp = c( 1.95, 0.3, 0),
+     tck = -0.02
+)
+
+# Plot sub plot
+# Note that x and y axes have been suppressed, as have annotations
+
+plot(
+     x = trees$Girth,
+     y = trees$Volume,
+     pch = 16,
+     col = "hotpink",
+     ann = FALSE,
+     xlim = c(5,20),
+     ylim = c(5,70),
+     xaxt = "n",
+     yaxt = "n"
+     )
+
+# Use predict to calculate the untransformed model. Note the untf=T
+
+lines(
+     10 ^ predict(
+          model1,
+          list(Girth = 1:50),
+          untf = T
+          ),
+     lty = 1,
+     lwd = 2,
+     col = rgb(0,0,1,0.5)
+)
+
+# Add x-axis
+
+axis(
+     side=1, 
+     at = seq(0,20,5), 
+     lwd = 0.5
+)
+
+# Add y-axis
+
+axis(
+     side = 2,
+     at = seq(0,100,20), 
+     las = 2, 
+     lwd = 0.5
+)
+
+# Reset the plotting parameters
+
+par(
+     fig=c(0,1,0,1),  
+     new = F
+)
+```
+
+Finally, we should check the model assumptions again...
+
+```{r regression7, fig.height=25}
+
+par(mfrow=c(4,1))
+plot(model1)
+par(mfrow=c(1,1))
+
+```
+
+The diagnostic plots seem to be a little better for the transformed data. Hence it seems like a justified choice to transform the data.

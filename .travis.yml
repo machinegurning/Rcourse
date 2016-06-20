@@ -5,11 +5,13 @@ cache: packages
 r_packages:
  - devtools
  - RcolorBrewer
+ - reshape2
 
 install:
   - Rscript -e "if (!require('devtools')) install.packages('devtools')"
   - Rscript -e "devtools::install_github('ivyleavedtoadflax/bookdown')"
   - Rscript -e "if (!require('RcolorBrewer')) install.packages('RColorBrewer')"
+  - Rscript -e "if (!require('reshape')) install.packages('reshape')"
 
 before_script:
   - chmod +x ./_build.sh

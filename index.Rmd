@@ -30,13 +30,12 @@ All the course materials are available here. In addition you will need to downlo
 
 ## Structure
 
-The course is divided into five main sections:
+The course is divided into four main sections:
 
 * Getting started
 * Moving data around
 * Visualising your data
 * Basic data analysis
-* More advanced stuff
 
 Follow the links on teh left hand side to get around.
 
