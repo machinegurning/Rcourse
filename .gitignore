@@ -4,3 +4,7 @@
 .Ruserdata
 *.Rproj
 GH_TOKEN
+_book/anova.html _book/getting-data-into-R.html _book/histograms-and-box-and-whisker-plots.html _book/index.html _book/installing-r-packages.html _book/linear-regression.html _book/multiple-plots.html _book/R-environment.html _book/R-style.html _book/scatter-plots.html _book/selecting-data.html _book/t-tests.html
+_book/*.html
+_bookdown_files/
+_book/Getting_started_with_R_files/
