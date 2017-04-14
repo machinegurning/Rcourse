@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Getting started with R</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="A quick and simple intro to R">
+  <meta name="generator" content="bookdown 0.0.73 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Getting started with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A quick and simple intro to R" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Getting started with R" />
+  
+  <meta name="twitter:description" content="A quick and simple intro to R" />
+  
+
+<meta name="author" content="Matthew Upson">
+
+<meta name="date" content="2016-11-18">
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+
+<link rel="next" href="R-environment.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Course info</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#course-materials-and-structure"><i class="fa fa-check"></i><b>1.1</b> Course materials and structure</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#structure"><i class="fa fa-check"></i><b>1.2</b> Structure</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#getting-help"><i class="fa fa-check"></i><b>1.3</b> Getting help</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#within-r"><i class="fa fa-check"></i><b>1.3.1</b> Within R</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#books-and-guides"><i class="fa fa-check"></i><b>1.3.2</b> Books and guides</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#forums"><i class="fa fa-check"></i><b>1.3.3</b> Forums</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="R-environment.html"><a href="R-environment.html"><i class="fa fa-check"></i><b>2</b> The R environment</a><ul>
+<li class="chapter" data-level="2.1" data-path="R-environment.html"><a href="R-environment.html#the-r-console"><i class="fa fa-check"></i><b>2.1</b> The R console</a></li>
+<li class="chapter" data-level="2.2" data-path="R-environment.html"><a href="R-environment.html#the-scripting-window"><i class="fa fa-check"></i><b>2.2</b> The scripting window</a></li>
+<li class="chapter" data-level="2.3" data-path="R-environment.html"><a href="R-environment.html#the-plotting-window"><i class="fa fa-check"></i><b>2.3</b> The plotting window</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="R-style.html"><a href="R-style.html"><i class="fa fa-check"></i><b>3</b> R coding style</a></li>
+<li class="chapter" data-level="4" data-path="installing-r-packages.html"><a href="installing-r-packages.html"><i class="fa fa-check"></i><b>4</b> Installing R Packages</a></li>
+<li class="chapter" data-level="5" data-path="getting-data-into-R.html"><a href="getting-data-into-R.html"><i class="fa fa-check"></i><b>5</b> Getting data into R</a><ul>
+<li class="chapter" data-level="5.1" data-path="getting-data-into-R.html"><a href="getting-data-into-R.html#small-variables"><i class="fa fa-check"></i><b>5.1</b> Small variables</a></li>
+<li class="chapter" data-level="5.2" data-path="getting-data-into-R.html"><a href="getting-data-into-R.html#importing-tables"><i class="fa fa-check"></i><b>5.2</b> Importing tables</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="selecting-data.html"><a href="selecting-data.html"><i class="fa fa-check"></i><b>6</b> Selecting data</a><ul>
+<li class="chapter" data-level="6.0.1" data-path="selecting-data.html"><a href="selecting-data.html#exercise"><i class="fa fa-check"></i><b>6.0.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="scatter-plots.html"><a href="scatter-plots.html"><i class="fa fa-check"></i><b>7</b> Scatter-plots</a><ul>
+<li class="chapter" data-level="7.0.1" data-path="scatter-plots.html"><a href="scatter-plots.html#point-colour-and-shape"><i class="fa fa-check"></i><b>7.0.1</b> Point colour and shape</a></li>
+<li class="chapter" data-level="7.0.2" data-path="scatter-plots.html"><a href="scatter-plots.html#axes-and-outlines"><i class="fa fa-check"></i><b>7.0.2</b> Axes and outlines</a></li>
+<li class="chapter" data-level="7.0.3" data-path="scatter-plots.html"><a href="scatter-plots.html#additional-observations"><i class="fa fa-check"></i><b>7.0.3</b> Additional observations</a></li>
+<li class="chapter" data-level="7.0.4" data-path="scatter-plots.html"><a href="scatter-plots.html#log-transformations"><i class="fa fa-check"></i><b>7.0.4</b> Log transformations</a></li>
+<li class="chapter" data-level="7.0.5" data-path="scatter-plots.html"><a href="scatter-plots.html#customising-white-space"><i class="fa fa-check"></i><b>7.0.5</b> Customising white space</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="histograms-and-box-and-whisker-plots.html"><a href="histograms-and-box-and-whisker-plots.html"><i class="fa fa-check"></i><b>8</b> Histograms and Box and whisker plots</a><ul>
+<li class="chapter" data-level="8.0.1" data-path="histograms-and-box-and-whisker-plots.html"><a href="histograms-and-box-and-whisker-plots.html#histograms"><i class="fa fa-check"></i><b>8.0.1</b> Histograms</a></li>
+<li class="chapter" data-level="8.0.2" data-path="histograms-and-box-and-whisker-plots.html"><a href="histograms-and-box-and-whisker-plots.html#box-and-whisker-plots"><i class="fa fa-check"></i><b>8.0.2</b> Box and whisker plots</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="multiple-plots.html"><a href="multiple-plots.html"><i class="fa fa-check"></i><b>9</b> Multiple plots</a></li>
+<li class="chapter" data-level="10" data-path="t-tests.html"><a href="t-tests.html"><i class="fa fa-check"></i><b>10</b> T-tests</a></li>
+<li class="chapter" data-level="11" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>11</b> Linear regression</a><ul>
+<li class="chapter" data-level="11.1" data-path="linear-regression.html"><a href="linear-regression.html#transformation"><i class="fa fa-check"></i><b>11.1</b> Transformation</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>12</b> ANOVA</a><ul>
+<li class="chapter" data-level="12.1" data-path="anova.html"><a href="anova.html#one-way-anova"><i class="fa fa-check"></i><b>12.1</b> One-way ANOVA</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="anova.html"><a href="anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>12.1.1</b> Multiple comparisons</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="anova.html"><a href="anova.html#two-way-anova"><i class="fa fa-check"></i><b>12.2</b> Two-way ANOVA</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Getting started with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Getting started with R</h1>
+<h4 class="author"><em>Matthew Upson <a href="mailto:matthew.a.upson@gmail.com">matthew.a.upson@gmail.com</a></em></h4>
+<h4 class="date"><em>2016-11-18</em></h4>
+</div>
+<div id="course-info" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> Course info</h1>
+<p>This course was originally delivered in 2012 for a class of researchers and research students at Cranfield University, most with little or no experience of R. As I have continued to teach R in various capacities ever since, I have updated this course to provide more up-to-date material for those coming to R for teh first time in 2016.</p>
+<p>The aim of this course remains the same as the original:</p>
+<blockquote>
+<p>This course is designed to give you a brief introduction to the statistical programming environment R. <em>This is not a course on which statistics to use and why</em>, it is primarily concerned with getting you started with the R language, and as such assumes a basic levels of statistical knowledge.</p>
+</blockquote>
+<p>In its previous incarnation, this book relied on examples from Mick Crawley’s seminal text’The R Book’. This course relies less on that book, and although a little dated now, it remains ane excellent resource, especially when using R for generalised linear modelling.</p>
+<div id="course-materials-and-structure" class="section level2">
+<h2><span class="header-section-number">1.1</span> Course materials and structure</h2>
+<p>All the course materials are available here. In addition you will need to download data from the internet for certain exercises, but this will be explained to you in the appropriate section.</p>
+</div>
+<div id="structure" class="section level2">
+<h2><span class="header-section-number">1.2</span> Structure</h2>
+<p>The course is divided into four main sections:</p>
+<ul>
+<li>Getting started</li>
+<li>Moving data around</li>
+<li>Visualising your data</li>
+<li>Basic data analysis</li>
+</ul>
+<p>Follow the links on teh left hand side to get around.</p>
+<p>As you go along, You will be able to copy and paste the code from these notes directly into the R console., but do try to understand what it is you are doing!</p>
+<p>In addition there are a number of exercises throughout. These are indicated by a box:</p>
+<div class="ex">
+<p><strong>Exercise</strong></p>
+<p>This is an exercise</p>
+</div>
+</div>
+<div id="getting-help" class="section level2">
+<h2><span class="header-section-number">1.3</span> Getting help</h2>
+<p>Getting help with R is very easy - there is a thriving online community of R users who, so the chances are that if you have a problem, someone else will have posted a solution online before you.</p>
+<div id="within-r" class="section level3">
+<h3><span class="header-section-number">1.3.1</span> Within R</h3>
+<p>It is possible to get help in R itself. If you are interested in a function, you can simply type the name of that function into the console preceded by a question mark. This will bring up the relevant help file - although they are not always that easy to decipher!</p>
+</div>
+<div id="books-and-guides" class="section level3">
+<h3><span class="header-section-number">1.3.2</span> Books and guides</h3>
+<p>There are also many online guides available - googling ‘R guide’ will reveal many, but three are listed below:</p>
+<ul>
+<li><a href="http://www.rstudio.com/ide/docs/help_with_r" class="uri">http://www.rstudio.com/ide/docs/help_with_r</a></li>
+<li><a href="http://cran.r-project.org/doc/contrib/Owen-TheRGuide.pdf" class="uri">http://cran.r-project.org/doc/contrib/Owen-TheRGuide.pdf</a></li>
+<li><a href="https://sites.google.com/site/undergraduateguidetor">https://sites.google.com/site/undergraduateguidetor/</a></li>
+</ul>
+<p>I point the reader particularly in the direction of:</p>
+<ul>
+<li><a href="http://adv-r.had.co.nz/">Advanced R</a></li>
+<li><a href="http://r4ds.had.co.nz/">R for Data Science</a></li>
+</ul>
+</div>
+<div id="forums" class="section level3">
+<h3><span class="header-section-number">1.3.3</span> Forums</h3>
+<p>Forums are a great place for R help - again try googling this, although arguably the best is: <a href="http://stackoverflow.com/" class="uri">http://stackoverflow.com/</a>. Make sure you read the rules of the forum carefully, as contributors often don’t take kindly to poorly stated questions! That said, if you don’t get an answer on Stack Overflow, you have found a very tricky problem indeed.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="R-environment.html" class="navigation navigation-next navigation-unique" aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

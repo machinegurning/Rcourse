@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Getting started with R</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="A quick and simple intro to R">
+  <meta name="generator" content="bookdown 0.0.73 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Getting started with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A quick and simple intro to R" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Getting started with R" />
+  
+  <meta name="twitter:description" content="A quick and simple intro to R" />
+  
+
+<meta name="author" content="Matthew Upson matthew.a.upson@gmail.com">
+
+<meta name="date" content="2016-11-18">
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="linear-regression.html">
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Course info</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#course-materials-and-structure"><i class="fa fa-check"></i><b>1.1</b> Course materials and structure</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#structure"><i class="fa fa-check"></i><b>1.2</b> Structure</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#getting-help"><i class="fa fa-check"></i><b>1.3</b> Getting help</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#within-r"><i class="fa fa-check"></i><b>1.3.1</b> Within R</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#books-and-guides"><i class="fa fa-check"></i><b>1.3.2</b> Books and guides</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#forums"><i class="fa fa-check"></i><b>1.3.3</b> Forums</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="R-environment.html"><a href="R-environment.html"><i class="fa fa-check"></i><b>2</b> The R environment</a><ul>
+<li class="chapter" data-level="2.1" data-path="R-environment.html"><a href="R-environment.html#the-r-console"><i class="fa fa-check"></i><b>2.1</b> The R console</a></li>
+<li class="chapter" data-level="2.2" data-path="R-environment.html"><a href="R-environment.html#the-scripting-window"><i class="fa fa-check"></i><b>2.2</b> The scripting window</a></li>
+<li class="chapter" data-level="2.3" data-path="R-environment.html"><a href="R-environment.html#the-plotting-window"><i class="fa fa-check"></i><b>2.3</b> The plotting window</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="R-style.html"><a href="R-style.html"><i class="fa fa-check"></i><b>3</b> R coding style</a></li>
+<li class="chapter" data-level="4" data-path="installing-r-packages.html"><a href="installing-r-packages.html"><i class="fa fa-check"></i><b>4</b> Installing R Packages</a></li>
+<li class="chapter" data-level="5" data-path="getting-data-into-R.html"><a href="getting-data-into-R.html"><i class="fa fa-check"></i><b>5</b> Getting data into R</a><ul>
+<li class="chapter" data-level="5.1" data-path="getting-data-into-R.html"><a href="getting-data-into-R.html#small-variables"><i class="fa fa-check"></i><b>5.1</b> Small variables</a></li>
+<li class="chapter" data-level="5.2" data-path="getting-data-into-R.html"><a href="getting-data-into-R.html#importing-tables"><i class="fa fa-check"></i><b>5.2</b> Importing tables</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="selecting-data.html"><a href="selecting-data.html"><i class="fa fa-check"></i><b>6</b> Selecting data</a><ul>
+<li class="chapter" data-level="6.0.1" data-path="selecting-data.html"><a href="selecting-data.html#exercise"><i class="fa fa-check"></i><b>6.0.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="scatter-plots.html"><a href="scatter-plots.html"><i class="fa fa-check"></i><b>7</b> Scatter-plots</a><ul>
+<li class="chapter" data-level="7.0.1" data-path="scatter-plots.html"><a href="scatter-plots.html#point-colour-and-shape"><i class="fa fa-check"></i><b>7.0.1</b> Point colour and shape</a></li>
+<li class="chapter" data-level="7.0.2" data-path="scatter-plots.html"><a href="scatter-plots.html#axes-and-outlines"><i class="fa fa-check"></i><b>7.0.2</b> Axes and outlines</a></li>
+<li class="chapter" data-level="7.0.3" data-path="scatter-plots.html"><a href="scatter-plots.html#additional-observations"><i class="fa fa-check"></i><b>7.0.3</b> Additional observations</a></li>
+<li class="chapter" data-level="7.0.4" data-path="scatter-plots.html"><a href="scatter-plots.html#log-transformations"><i class="fa fa-check"></i><b>7.0.4</b> Log transformations</a></li>
+<li class="chapter" data-level="7.0.5" data-path="scatter-plots.html"><a href="scatter-plots.html#customising-white-space"><i class="fa fa-check"></i><b>7.0.5</b> Customising white space</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="histograms-and-box-and-whisker-plots.html"><a href="histograms-and-box-and-whisker-plots.html"><i class="fa fa-check"></i><b>8</b> Histograms and Box and whisker plots</a><ul>
+<li class="chapter" data-level="8.0.1" data-path="histograms-and-box-and-whisker-plots.html"><a href="histograms-and-box-and-whisker-plots.html#histograms"><i class="fa fa-check"></i><b>8.0.1</b> Histograms</a></li>
+<li class="chapter" data-level="8.0.2" data-path="histograms-and-box-and-whisker-plots.html"><a href="histograms-and-box-and-whisker-plots.html#box-and-whisker-plots"><i class="fa fa-check"></i><b>8.0.2</b> Box and whisker plots</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="multiple-plots.html"><a href="multiple-plots.html"><i class="fa fa-check"></i><b>9</b> Multiple plots</a></li>
+<li class="chapter" data-level="10" data-path="t-tests.html"><a href="t-tests.html"><i class="fa fa-check"></i><b>10</b> T-tests</a></li>
+<li class="chapter" data-level="11" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>11</b> Linear regression</a><ul>
+<li class="chapter" data-level="11.1" data-path="linear-regression.html"><a href="linear-regression.html#transformation"><i class="fa fa-check"></i><b>11.1</b> Transformation</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>12</b> ANOVA</a><ul>
+<li class="chapter" data-level="12.1" data-path="anova.html"><a href="anova.html#one-way-anova"><i class="fa fa-check"></i><b>12.1</b> One-way ANOVA</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="anova.html"><a href="anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>12.1.1</b> Multiple comparisons</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="anova.html"><a href="anova.html#two-way-anova"><i class="fa fa-check"></i><b>12.2</b> Two-way ANOVA</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Getting started with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="anova" class="section level1">
+<h1><span class="header-section-number">Chapter 12</span> ANOVA</h1>
+<div id="one-way-anova" class="section level2">
+<h2><span class="header-section-number">12.1</span> One-way ANOVA</h2>
+<p>Analysis of variance is simple enough in R, using the <code>aov()</code> command. We will start with a simple One-Way ANOVA. We’ll use data on the effect of two paint application methods (<code>applic</code>) and three primers (<code>primer</code>) on the quality of paint adherence (<code>adhf</code>).</p>
+<p>You will need to download this data from <a href="https://raw.githubusercontent.com/ivyleavedtoadflax/R_notes/master/paint.csv" class="uri">https://raw.githubusercontent.com/ivyleavedtoadflax/R_notes/master/paint.csv</a>, and import the data into <code>R</code> using one of the methods we have discussed previously. Call the dataframe <code>paint</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">paint</code></pre></div>
+<pre><code>##    adhf primer  applic
+## 1   4.0      1  Dipped
+## 2   4.5      1  Dipped
+## 3   4.3      1  Dipped
+## 4   5.6      2  Dipped
+## 5   4.9      2  Dipped
+## 6   5.4      2  Dipped
+## 7   3.8      3  Dipped
+## 8   3.7      3  Dipped
+## 9   4.0      3  Dipped
+## 10  5.4      1 Sprayed
+## 11  4.9      1 Sprayed
+## 12  5.6      1 Sprayed
+## 13  5.8      2 Sprayed
+## 14  6.1      2 Sprayed
+## 15  6.3      2 Sprayed
+## 16  5.5      3 Sprayed
+## 17  5.0      3 Sprayed
+## 18  5.0      3 Sprayed</code></pre>
+<p>First we consider only the effect of <code>primer</code> - a one way ANOVA.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">aov</span>(
+     adhf ~<span class="st"> </span>primer,
+     <span class="dt">data =</span> paint
+     )</code></pre></div>
+<p>We need to call the results of this analysis with <code>summary</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(model)</code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)
+## primer       1  0.241  0.2408   0.368  0.553
+## Residuals   16 10.477  0.6548</code></pre>
+<p>We get the usual ANOVA table that we would expect from this kind of analysis. Importantly, we see that the primer type does not appear to have a significant influence on the adherence of the paint (=0.55).</p>
+<p><em>But wait!</em> We didn’t specify that <code>primer</code> is meant to be a factor. Since it is numeric, R has no way of implicitly knowing this, so is currently treating <code>primer</code> as a continuous variable, which it definitely is not!</p>
+<p>Let’s re-run the analysis correctly identifying <code>primer</code> as a categorical variable.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">paint$primer &lt;-<span class="st"> </span><span class="kw">factor</span>(paint$primer)
+
+<span class="kw">str</span>(paint)</code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    18 obs. of  3 variables:
+##  $ adhf  : num  4 4.5 4.3 5.6 4.9 5.4 3.8 3.7 4 5.4 ...
+##  $ primer: Factor w/ 3 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;: 1 1 1 2 2 2 3 3 3 1 ...
+##  $ applic: Factor w/ 2 levels &quot;Dipped&quot;,&quot;Sprayed&quot;: 1 1 1 1 1 1 1 1 1 2 ...</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">aov</span>(
+     adhf ~<span class="st"> </span>primer,
+     <span class="dt">data =</span> paint
+     )
+
+<span class="kw">summary</span>(model)</code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)  
+## primer       2  4.581  2.2906   5.599 0.0153 *
+## Residuals   15  6.137  0.4091                 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>This time, we see that primer type does have a significant effect. Let’s plot the data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(
+     <span class="kw">split</span>(
+          paint$adhf,
+          paint$primer
+          )
+     )</code></pre></div>
+<p><img src="Getting_started_with_R_files/figure-html/ANOVA1-1.png" width="672" /></p>
+<p>So it looks like primer 2 is the most effective, but we still don’t know if there are significant differences between primer 1 and 2, and 1 and 3, although we can guess there is a significant difference between 1 and 3.</p>
+<p>We can use <code>model.tables()</code> to get a list of the effects:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">model.tables</span>(
+     <span class="dt">x =</span> model,
+     <span class="dt">type=</span><span class="st">&quot;mean&quot;</span>,
+     <span class="dt">se =</span> <span class="ot">TRUE</span>
+     )</code></pre></div>
+<pre><code>## Tables of means
+## Grand mean
+##          
+## 4.988889 
+## 
+##  primer 
+## primer
+##     1     2     3 
+## 4.783 5.683 4.500 
+## 
+## Standard errors for differences of means
+##         primer
+##         0.3693
+## replic.      6</code></pre>
+<p>This gives us the treatment means, and the standard error of the differences. Note that a more versatile way of calculating data for groups is the <code>melt</code> and <code>cast</code> methods that we have used earlier.</p>
+<div class="ex">
+<h3 id="exercise-6"><span class="header-section-number">12.1</span> Exercise</h3>
+<p>Get the median, mean, standard deviation, standard error, upper and lower 95% confidence intervals for the three primers in the <code>paint</code> data</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">se &lt;-<span class="st"> </span>function(x) {
+     
+     <span class="kw">sd</span>(x)/<span class="kw">sqrt</span>(<span class="kw">length</span>(x))
+     
+     }
+
+uci95 &lt;-<span class="st"> </span>function(x) {
+     
+     <span class="kw">mean</span>(x) +<span class="st"> </span><span class="kw">qt</span>(<span class="fl">0.975</span>,<span class="dt">df =</span> <span class="kw">length</span>(x)-<span class="dv">1</span>) *<span class="st"> </span><span class="kw">sd</span>(x) /<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">length</span>(x))
+
+}
+
+lci95 &lt;-<span class="st"> </span>function(x) {
+     
+     <span class="kw">mean</span>(x) -<span class="st"> </span><span class="kw">qt</span>(<span class="fl">0.975</span>,<span class="dt">df =</span> <span class="kw">length</span>(x)-<span class="dv">1</span>) *<span class="st"> </span><span class="kw">sd</span>(x) /<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">length</span>(x))
+
+}</code></pre></div>
+</div>
+<div id="multiple-comparisons" class="section level3">
+<h3><span class="header-section-number">12.1.1</span> Multiple comparisons</h3>
+<p>If we really want to know whether there are significant differences between the means, we need to do some sort of multiple comparison test. Be aware that there are dozens of possible multiple comparison tests, and there is some controversy about their use. In particular, you should be aware of controlling the family-wise error rate, which can be inflated in uncontrolled ‘least significant difference’ (LSD) tests. See <a href="http://en.wikipedia.org/wiki/Multiple_comparisons" class="uri">http://en.wikipedia.org/wiki/Multiple_comparisons</a> and <a href="http://en.wikipedia.org/wiki/Familywise_error_rate" class="uri">http://en.wikipedia.org/wiki/Familywise_error_rate</a> for more information. There is also a discussion of the problem on p.482 of the R book.</p>
+<p>There are built in functions to do this analysis, but we will use the package <code>agricolae</code> which has greater functionality.</p>
+<p>For this example we will use Tukey’s Honest Significant Difference test (HSD), which provides a reasonably conservative test.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(agricolae)
+
+<span class="co"># Note that here we have to specify the response (y) and the treatment (trt) of</span>
+<span class="co"># interest, in adittion to the mean residual mean squares and residual degree of</span>
+<span class="co"># freedom. These are taken from the summary(model) table.</span>
+<span class="co">#</span>
+<span class="co">#</span>
+
+HSD_primer &lt;-<span class="st"> </span><span class="kw">HSD.test</span>(
+     <span class="dt">y =</span> paint$adhf,
+     <span class="dt">trt =</span> paint$primer,
+     <span class="dt">MSerror =</span> <span class="fl">0.4091</span>,
+     <span class="dt">DFerror =</span> <span class="dv">15</span>,
+     <span class="dt">alpha =</span> <span class="fl">0.05</span>
+     )
+
+<span class="co"># Note that it is possible to automate the extraction of these values from the</span>
+<span class="co"># model object. And this is worth doing if you are running a lot of multiple</span>
+<span class="co"># comparison tests.</span>
+<span class="co">#</span>
+<span class="co">#</span>
+<span class="co"># Here is some code I have written to do just that. The if statements deal with</span>
+<span class="co"># the cases in which you have a nested experimental structure.</span>
+<span class="co">#</span>
+<span class="co">#</span>
+
+ms_w &lt;-<span class="st"> </span>function(x) {
+     
+     if (<span class="st">&quot;Within&quot;</span> %in%<span class="st"> </span><span class="kw">names</span>(x)) {
+          
+          y &lt;-<span class="st"> </span><span class="kw">summary</span>(x$Within)[[<span class="dv">1</span>]][[<span class="dv">3</span>]]
+          <span class="kw">tail</span>(y,<span class="dv">1</span>)
+          
+          }    else  {
+               
+               y &lt;-<span class="st"> </span><span class="kw">summary</span>(x)[[<span class="dv">1</span>]][[<span class="dv">3</span>]]
+               <span class="kw">tail</span>(y,<span class="dv">1</span>)     
+               
+               }
+     }
+
+df_w &lt;-<span class="st"> </span>function(x) {
+     
+     if (<span class="st">&quot;Within&quot;</span> %in%<span class="st"> </span><span class="kw">names</span>(x)) {
+          
+          x$Within$df.residual  
+          
+          
+          }    else  {
+               
+               x$df.residual
+               
+               }
+     }
+<span class="co">#</span>
+<span class="co"># Check these against the output from the model:</span>
+<span class="co">#</span>
+
+<span class="kw">ms_w</span>(model)</code></pre></div>
+<pre><code>## [1] 0.4091111</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">df_w</span>(model)</code></pre></div>
+<pre><code>## [1] 15</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#</span>
+<span class="co"># And the test again with the automated functions</span>
+<span class="co">#</span>
+HSD_primer &lt;-<span class="st">  </span><span class="kw">HSD.test</span>(
+     <span class="dt">y =</span> paint$adhf,
+     <span class="dt">trt =</span> paint$primer,
+     <span class="dt">MSerror =</span> <span class="kw">ms_w</span>(model),
+     <span class="dt">DFerror =</span> <span class="kw">df_w</span>(model),
+     <span class="dt">alpha =</span> <span class="fl">0.05</span>
+     )
+
+HSD_primer</code></pre></div>
+<pre><code>## $statistics
+##       Mean       CV   MSerror       HSD
+##   4.988889 12.82085 0.4091111 0.9592031
+## 
+## $parameters
+##   Df ntr StudentizedRange alpha  test       name.t
+##   15   3         3.673378  0.05 Tukey paint$primer
+## 
+## $means
+##   paint$adhf       std r Min Max
+## 1   4.783333 0.6306082 6 4.0 5.6
+## 2   5.683333 0.5036533 6 4.9 6.3
+## 3   4.500000 0.7589466 6 3.7 5.5
+## 
+## $comparison
+## NULL
+## 
+## $groups
+##   trt    means  M
+## 1   2 5.683333  a
+## 2   1 4.783333 ab
+## 3   3 4.500000  b</code></pre>
+<p>Amongst all the output we get, is a table of groups:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">HSD_primer$groups</code></pre></div>
+<pre><code>##   trt    means  M
+## 1   2 5.683333  a
+## 2   1 4.783333 ab
+## 3   3 4.500000  b</code></pre>
+<p>Here, means with the same letter indicate no significant difference. Hence we see that primer 2 is significantly different from primer 3, but there is no difference between primer 1 and 2, or primer 2 and 3. Note that we used <code>alpha = 0.05</code>, but you can use a more stringent <code>alpha</code> if necessary.</p>
+<p>We can display these differences using error bars and letters to signify significant differences in the plot below. The function <code>se_lines()</code> can quite easily be adapted to your own plots.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(reshape)</code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;reshape&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:plyr&#39;:
+## 
+##     rename, round_any</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">paint_m &lt;-<span class="st"> </span><span class="kw">melt</span>(
+     paint,
+     <span class="dt">id =</span> <span class="dv">2</span>:<span class="dv">3</span>
+     )
+
+paint_c &lt;-<span class="st"> </span><span class="kw">cast</span>(
+     paint_m,
+     primer ~<span class="st"> </span>variable,
+     <span class="kw">c</span>(mean,se,lci95,uci95)
+     )
+
+paint_plot &lt;-<span class="st"> </span><span class="kw">barplot</span>(
+     paint_c$adhf_mean,
+     <span class="dt">ylab =</span> <span class="st">&quot;Adhesion factor&quot;</span>,
+     <span class="dt">xlab =</span> <span class="st">&quot;Primer&quot;</span>,
+     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">7</span>),
+     <span class="dt">space =</span> <span class="fl">0.1</span>,
+     <span class="dt">names =</span> paint_c$primer
+     )
+<span class="co">#</span>
+<span class="co">#</span>
+<span class="co">#</span>
+<span class="co"># Specify function to take four arguments: </span>
+<span class="co">#</span>
+<span class="co"># x is the dataframe from which the  summary data comes, in our case, a cast</span>
+<span class="co"># object. This object must contain a mean and se column</span>
+<span class="co">#</span>
+<span class="co"># y is the name of the plot - we  need to give the plot an object name due to</span>
+<span class="co"># vagaries of the barplot function - by naming it as an object, we can place</span>
+<span class="co"># labels and error bars more precisely.</span>
+<span class="co">#</span>
+<span class="co"># Hline is the length of horizontal lines used in error bars. It is also used to</span>
+<span class="co"># specify the position of the significance letter. MCT is the name of the</span>
+<span class="co">#</span>
+<span class="co"># Multiple comparison test object output from agricolae - this will be an</span>
+<span class="co"># HSD.test or LSD.test object.</span>
+<span class="co">#</span>
+<span class="co">#</span>
+<span class="co">#</span>
+
+se_lines &lt;-<span class="st"> </span>function(x,y,Hline,MCT) {
+
+<span class="co">#</span>
+<span class="co">#</span>
+<span class="co"># Run a loop for the same number of times as we have levels of treatment</span>
+<span class="co"># factors</span>
+<span class="co">#</span>
+<span class="co">#</span>
+     
+for (i in <span class="dv">1</span>:<span class="kw">length</span>(x[,<span class="dv">1</span>])) {
+     
+<span class="co">#</span>
+<span class="co">#</span>
+<span class="co"># Find the mean and se columns using grep</span>
+<span class="co">#</span>
+<span class="co">#</span>
+     
+     x_mean &lt;-<span class="st"> </span>x[,<span class="kw">grep</span>(<span class="st">&quot;mean&quot;</span>,<span class="kw">names</span>(x))]
+     x_se &lt;-<span class="st"> </span>x[,<span class="kw">grep</span>(<span class="st">&quot;se&quot;</span>,<span class="kw">names</span>(x))]
+
+<span class="co">#</span>
+<span class="co">#     </span>
+<span class="co"># Create error bars</span>
+<span class="co">#</span>
+<span class="co">#     </span>
+  <span class="kw">lines</span>(
+    <span class="kw">c</span>(y[i],y[i]),
+    <span class="kw">c</span>(x_mean[i]+(x_se[i]),x_mean[i]-(x_se[i]))
+  )
+  
+  <span class="kw">lines</span>(
+    <span class="kw">c</span>(y[i]-Hline,y[i]+Hline),
+    <span class="kw">c</span>(x_mean[i]+(x_se[i]),x_mean[i]+(x_se[i]))
+  )
+  
+  <span class="kw">lines</span>(
+    <span class="kw">c</span>(y[i]-Hline,y[i]+Hline),
+    <span class="kw">c</span>(x_mean[i]-(x_se[i]),x_mean[i]-(x_se[i]))
+    )
+
+<span class="co">#</span>
+<span class="co">#</span>
+<span class="co"># Add significance letters above the error bars.</span>
+<span class="co">#    </span>
+<span class="co"># Get the correct order for the significance labels from the agricolae test</span>
+<span class="co"># object. This step is required, because the output from agricolae test</span>
+<span class="co"># objects are ordered by effect size, not by the initial order of factors</span>
+<span class="co"># specified in the input dataframe.</span>
+<span class="co">#</span>
+<span class="co">#</span>
+<span class="co">#</span>
+     sig_labels &lt;-<span class="st"> </span><span class="kw">sapply</span>(x[,<span class="dv">1</span>], function(z) {
+          
+          MCT$groups$M[<span class="kw">grep</span>(z,MCT$groups$trt)]
+          
+          }
+          
+          )
+     
+  <span class="kw">text</span>(
+       <span class="dt">y =</span> x_mean[i] +<span class="st"> </span>x_se[i] +<span class="st"> </span><span class="dv">5</span> *<span class="st"> </span>Hline,
+       <span class="dt">x =</span> y[i],
+       <span class="dt">labels =</span> sig_labels[i],
+       <span class="dt">cex =</span> <span class="dv">1</span>
+  )
+  
+  }
+
+}
+
+<span class="co">#</span>
+<span class="co">#</span>
+<span class="co"># Run the final code:</span>
+<span class="co">#</span>
+<span class="co">#</span>
+
+<span class="kw">se_lines</span>(
+     paint_c,
+     paint_plot,
+     <span class="fl">0.1</span>,
+     HSD_primer
+     )</code></pre></div>
+<p><img src="Getting_started_with_R_files/figure-html/ANOVA2-1.png" width="672" /></p>
+</div>
+</div>
+<div id="two-way-anova" class="section level2">
+<h2><span class="header-section-number">12.2</span> Two-way ANOVA</h2>
+<p>OK so now we will include the effect of application method into our model, creating a Two-way ANOVA.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model1 &lt;-<span class="st"> </span><span class="kw">aov</span>(
+     <span class="dt">formula =</span> adhf ~<span class="st"> </span>primer *<span class="st"> </span>applic,
+     <span class="dt">data =</span> paint
+     )</code></pre></div>
+<p>Note that we used the formula <code>adhf ~ primer * applic</code> in order to look at all the interactions between the two factors. If we didn’t want to look at the interactions we would use <code>+</code> instead of <code>*</code> - but you need to have a good reason to do this.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(model1)</code></pre></div>
+<pre><code>##               Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## primer         2  4.581   2.291  27.858 3.10e-05 ***
+## applic         1  4.909   4.909  59.703 5.36e-06 ***
+## primer:applic  2  0.241   0.121   1.466    0.269    
+## Residuals     12  0.987   0.082                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>So it looks like the <code>primer</code> and <code>applic</code> factors both have a significant effect on <code>adhf</code>, but there is no significant interaction between the two. If you follow the model-simplification method, you might now want to remove this unimportant interaction, leaving you with just the significant interactions:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model2 &lt;-<span class="st"> </span><span class="kw">update</span>(model1,~.-primer:applic)
+<span class="kw">summary</span>(model2)</code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## primer       2  4.581   2.291   26.12 1.88e-05 ***
+## applic       1  4.909   4.909   55.98 2.96e-06 ***
+## Residuals   14  1.228   0.088                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>More on this can be found in Crawley. But for now, we will not remove the non-significant terms.</p>
+<p>We must of course check for the assumptions of a linear model with ANOVA, as with regression. For brevity, we did not do this in the previous example - but you would need to in your analysis.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">1</span>))
+<span class="kw">plot</span>(model1)</code></pre></div>
+<p><img src="Getting_started_with_R_files/figure-html/ANOVA3-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</code></pre></div>
+<p>Additional diagnostic plots can be produced with:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">1</span>))
+<span class="kw">qqnorm</span>(<span class="kw">resid</span>(model1))
+<span class="kw">qqline</span>(<span class="kw">resid</span>(model1))
+<span class="kw">hist</span>(<span class="kw">resid</span>(model1))
+<span class="kw">plot</span>(<span class="kw">density</span>(<span class="kw">resid</span>(model1)))
+<span class="kw">plot</span>(<span class="kw">fitted</span>(model1),<span class="kw">resid</span>(model1))</code></pre></div>
+<p><img src="Getting_started_with_R_files/figure-html/ANOVA4-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</code></pre></div>
+<p>I think we can just about get away with that, although there is some suggestion of non-normality in the QQ plot. Transformation may improve that…</p>
+<p>Now the multiple comparison test. Again we will use Tukey’s HSD test. We found no interactions between primer and application method. Note that we must re-run our test of primer, because the model has changed, and with it the residual mean squares and the degrees of freedom.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">HSD_primer &lt;-<span class="st">  </span><span class="kw">HSD.test</span>(
+     <span class="dt">y =</span> paint$adhf,
+     <span class="dt">trt =</span> paint$primer,
+     <span class="dt">MSerror =</span> <span class="kw">ms_w</span>(model1),
+     <span class="dt">DFerror =</span> <span class="kw">df_w</span>(model1),
+     <span class="dt">alpha =</span> <span class="fl">0.05</span>
+     )
+
+HSD_primer</code></pre></div>
+<pre><code>## $statistics
+##       Mean       CV    MSerror       HSD
+##   4.988889 5.747656 0.08222222 0.4416697
+## 
+## $parameters
+##   Df ntr StudentizedRange alpha  test       name.t
+##   12   3         3.772929  0.05 Tukey paint$primer
+## 
+## $means
+##   paint$adhf       std r Min Max
+## 1   4.783333 0.6306082 6 4.0 5.6
+## 2   5.683333 0.5036533 6 4.9 6.3
+## 3   4.500000 0.7589466 6 3.7 5.5
+## 
+## $comparison
+## NULL
+## 
+## $groups
+##   trt    means M
+## 1   2 5.683333 a
+## 2   1 4.783333 b
+## 3   3 4.500000 b</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">HSD_applic &lt;-<span class="st">  </span><span class="kw">HSD.test</span>(
+     <span class="dt">y =</span> paint$adhf,
+     <span class="dt">trt =</span> paint$applic,
+     <span class="dt">MSerror =</span> <span class="kw">ms_w</span>(model1),
+     <span class="dt">DFerror =</span> <span class="kw">df_w</span>(model1),
+     <span class="dt">alpha =</span> <span class="fl">0.05</span>
+     )
+
+HSD_applic</code></pre></div>
+<pre><code>## $statistics
+##       Mean       CV    MSerror       HSD
+##   4.988889 5.747656 0.08222222 0.2945156
+## 
+## $parameters
+##   Df ntr StudentizedRange alpha  test       name.t
+##   12   2         3.081307  0.05 Tukey paint$applic
+## 
+## $means
+##         paint$adhf       std r Min Max
+## Dipped    4.466667 0.6928203 9 3.7 5.6
+## Sprayed   5.511111 0.4960959 9 4.9 6.3
+## 
+## $comparison
+## NULL
+## 
+## $groups
+##       trt    means M
+## 1 Sprayed 5.511111 a
+## 2 Dipped  4.466667 b</code></pre>
+<p>So we find that things change for primer under the new model, and there are significant differences between primer 2 and primers 1 and 3:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">HSD_primer$groups</code></pre></div>
+<pre><code>##   trt    means M
+## 1   2 5.683333 a
+## 2   1 4.783333 b
+## 3   3 4.500000 b</code></pre>
+<p>For application method, we see that spray application is more effective than dipping.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">HSD_applic$groups</code></pre></div>
+<pre><code>##       trt    means M
+## 1 Sprayed 5.511111 a
+## 2 Dipped  4.466667 b</code></pre>
+<p>Let’s plot these together</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))
+
+paint_plot &lt;-<span class="st"> </span><span class="kw">barplot</span>(
+     paint_c$adhf_mean,
+     <span class="dt">ylab =</span> <span class="st">&quot;Adhesion factor&quot;</span>,
+     <span class="dt">xlab =</span> <span class="st">&quot;Primer&quot;</span>,
+     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">7</span>),
+     <span class="dt">space =</span> <span class="fl">0.1</span>,
+     <span class="dt">names =</span> paint_c$primer
+     )
+
+<span class="kw">se_lines</span>(
+     paint_c,
+     paint_plot,
+     <span class="fl">0.1</span>,
+     HSD_primer
+     )
+
+paint_c2 &lt;-<span class="st"> </span><span class="kw">cast</span>(
+     paint_m,
+     applic ~<span class="st"> </span>variable,
+     <span class="kw">c</span>(mean,se)
+     )
+
+paint_plot &lt;-<span class="st"> </span><span class="kw">barplot</span>(
+     paint_c2$adhf_mean,
+     <span class="dt">ylab =</span> <span class="st">&quot;Adhesion factor&quot;</span>,
+     <span class="dt">xlab =</span> <span class="st">&quot;Application method&quot;</span>,
+     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">7</span>),
+     <span class="dt">space =</span> <span class="fl">0.1</span>,
+     <span class="dt">names =</span> paint_c2$applic
+     )
+<span class="kw">se_lines</span>(
+     paint_c2,
+     paint_plot,
+     <span class="fl">0.1</span>,
+     HSD_applic
+     )</code></pre></div>
+<p><img src="Getting_started_with_R_files/figure-html/ANOVA5-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</code></pre></div>
+
+</div>
+</div>
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="linear-regression.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/11-ANOVA.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Getting started with R</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="A quick and simple intro to R">
+  <meta name="generator" content="bookdown 0.0.73 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Getting started with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A quick and simple intro to R" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Getting started with R" />
+  
+  <meta name="twitter:description" content="A quick and simple intro to R" />
+  
+
+<meta name="author" content="Matthew Upson matthew.a.upson@gmail.com">
+
+<meta name="date" content="2016-11-18">
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="selecting-data.html">
+<link rel="next" href="histograms-and-box-and-whisker-plots.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Course info</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#course-materials-and-structure"><i class="fa fa-check"></i><b>1.1</b> Course materials and structure</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#structure"><i class="fa fa-check"></i><b>1.2</b> Structure</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#getting-help"><i class="fa fa-check"></i><b>1.3</b> Getting help</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#within-r"><i class="fa fa-check"></i><b>1.3.1</b> Within R</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#books-and-guides"><i class="fa fa-check"></i><b>1.3.2</b> Books and guides</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#forums"><i class="fa fa-check"></i><b>1.3.3</b> Forums</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="R-environment.html"><a href="R-environment.html"><i class="fa fa-check"></i><b>2</b> The R environment</a><ul>
+<li class="chapter" data-level="2.1" data-path="R-environment.html"><a href="R-environment.html#the-r-console"><i class="fa fa-check"></i><b>2.1</b> The R console</a></li>
+<li class="chapter" data-level="2.2" data-path="R-environment.html"><a href="R-environment.html#the-scripting-window"><i class="fa fa-check"></i><b>2.2</b> The scripting window</a></li>
+<li class="chapter" data-level="2.3" data-path="R-environment.html"><a href="R-environment.html#the-plotting-window"><i class="fa fa-check"></i><b>2.3</b> The plotting window</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="R-style.html"><a href="R-style.html"><i class="fa fa-check"></i><b>3</b> R coding style</a></li>
+<li class="chapter" data-level="4" data-path="installing-r-packages.html"><a href="installing-r-packages.html"><i class="fa fa-check"></i><b>4</b> Installing R Packages</a></li>
+<li class="chapter" data-level="5" data-path="getting-data-into-R.html"><a href="getting-data-into-R.html"><i class="fa fa-check"></i><b>5</b> Getting data into R</a><ul>
+<li class="chapter" data-level="5.1" data-path="getting-data-into-R.html"><a href="getting-data-into-R.html#small-variables"><i class="fa fa-check"></i><b>5.1</b> Small variables</a></li>
+<li class="chapter" data-level="5.2" data-path="getting-data-into-R.html"><a href="getting-data-into-R.html#importing-tables"><i class="fa fa-check"></i><b>5.2</b> Importing tables</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="selecting-data.html"><a href="selecting-data.html"><i class="fa fa-check"></i><b>6</b> Selecting data</a><ul>
+<li class="chapter" data-level="6.0.1" data-path="selecting-data.html"><a href="selecting-data.html#exercise"><i class="fa fa-check"></i><b>6.0.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="scatter-plots.html"><a href="scatter-plots.html"><i class="fa fa-check"></i><b>7</b> Scatter-plots</a><ul>
+<li class="chapter" data-level="7.0.1" data-path="scatter-plots.html"><a href="scatter-plots.html#point-colour-and-shape"><i class="fa fa-check"></i><b>7.0.1</b> Point colour and shape</a></li>
+<li class="chapter" data-level="7.0.2" data-path="scatter-plots.html"><a href="scatter-plots.html#axes-and-outlines"><i class="fa fa-check"></i><b>7.0.2</b> Axes and outlines</a></li>
+<li class="chapter" data-level="7.0.3" data-path="scatter-plots.html"><a href="scatter-plots.html#additional-observations"><i class="fa fa-check"></i><b>7.0.3</b> Additional observations</a></li>
+<li class="chapter" data-level="7.0.4" data-path="scatter-plots.html"><a href="scatter-plots.html#log-transformations"><i class="fa fa-check"></i><b>7.0.4</b> Log transformations</a></li>
+<li class="chapter" data-level="7.0.5" data-path="scatter-plots.html"><a href="scatter-plots.html#customising-white-space"><i class="fa fa-check"></i><b>7.0.5</b> Customising white space</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="histograms-and-box-and-whisker-plots.html"><a href="histograms-and-box-and-whisker-plots.html"><i class="fa fa-check"></i><b>8</b> Histograms and Box and whisker plots</a><ul>
+<li class="chapter" data-level="8.0.1" data-path="histograms-and-box-and-whisker-plots.html"><a href="histograms-and-box-and-whisker-plots.html#histograms"><i class="fa fa-check"></i><b>8.0.1</b> Histograms</a></li>
+<li class="chapter" data-level="8.0.2" data-path="histograms-and-box-and-whisker-plots.html"><a href="histograms-and-box-and-whisker-plots.html#box-and-whisker-plots"><i class="fa fa-check"></i><b>8.0.2</b> Box and whisker plots</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="multiple-plots.html"><a href="multiple-plots.html"><i class="fa fa-check"></i><b>9</b> Multiple plots</a></li>
+<li class="chapter" data-level="10" data-path="t-tests.html"><a href="t-tests.html"><i class="fa fa-check"></i><b>10</b> T-tests</a></li>
+<li class="chapter" data-level="11" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>11</b> Linear regression</a><ul>
+<li class="chapter" data-level="11.1" data-path="linear-regression.html"><a href="linear-regression.html#transformation"><i class="fa fa-check"></i><b>11.1</b> Transformation</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>12</b> ANOVA</a><ul>
+<li class="chapter" data-level="12.1" data-path="anova.html"><a href="anova.html#one-way-anova"><i class="fa fa-check"></i><b>12.1</b> One-way ANOVA</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="anova.html"><a href="anova.html#multiple-comparisons"><i class="fa fa-check"></i><b>12.1.1</b> Multiple comparisons</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="anova.html"><a href="anova.html#two-way-anova"><i class="fa fa-check"></i><b>12.2</b> Two-way ANOVA</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Getting started with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="scatter-plots" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> Scatter-plots</h1>
+<p>The basic plotting functions are very easy, but we first need some data to work with. For this example we are going to use one of the inbuilt datasets.</p>
+<p>There are a number of datasets which come readily loaded with the <code>datasets</code> package. In this example we are using the <code>trees</code> dataset, which contains ‘measurements of the girth, height and volume of timber in 31 felled black cherry trees’ (See <code>?trees</code> for more information)</p>
+<p>First, we will look at the data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trees</code></pre></div>
+<pre><code>##    Girth Height Volume
+## 1    8.3     70   10.3
+## 2    8.6     65   10.3
+## 3    8.8     63   10.2
+## 4   10.5     72   16.4
+## 5   10.7     81   18.8
+## 6   10.8     83   19.7
+## 7   11.0     66   15.6
+## 8   11.0     75   18.2
+## 9   11.1     80   22.6
+## 10  11.2     75   19.9
+## 11  11.3     79   24.2
+## 12  11.4     76   21.0
+## 13  11.4     76   21.4
+## 14  11.7     69   21.3
+## 15  12.0     75   19.1
+## 16  12.9     74   22.2
+## 17  12.9     85   33.8
+## 18  13.3     86   27.4
+## 19  13.7     71   25.7
+## 20  13.8     64   24.9
+## 21  14.0     78   34.5
+## 22  14.2     80   31.7
+## 23  14.5     74   36.3
+## 24  16.0     72   38.3
+## 25  16.3     77   42.6
+## 26  17.3     81   55.4
+## 27  17.5     82   55.7
+## 28  17.9     80   58.3
+## 29  18.0     80   51.5
+## 30  18.0     80   51.0
+## 31  20.6     87   77.0</code></pre>
+<p>So far so good. To produce a basic scatter plot in R is very simple. We use the <code>plot</code> command. In this example, we need to specify which parts of the trees dataset we are going to use. Just as revision, we will try three different ways of doing this - all will produce the same plot, but each one has a subtly different use.</p>
+<p>In the first example, we select a subscript from the dataframe using square brackets <code>[,1]</code>. Refer back to <a href="Tutorial/getting_data_into_R.html">Getting data into R</a> if you are unsure. This can be a useful way to select data from a larger dataset, if for instance we are dealing with matrices.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
+     <span class="dt">x =</span> trees[,<span class="dv">1</span>],
+     <span class="dt">y =</span> trees[,<span class="dv">2</span>]
+     )</code></pre></div>
+<p><img src="Getting_started_with_R_files/figure-html/Scatterplots-1-1.png" width="672" /></p>
+<p>The second way, we will use the <code>$</code> operator to select a column from within the dataframe:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
+     <span class="dt">x =</span> trees$Girth,
+     <span class="dt">y =</span> trees$Height
+     )</code></pre></div>
+<p><img src="Getting_started_with_R_files/figure-html/Scatterplots-2-1.png" width="672" /></p>
+<p>And finally, we can try the <code>with()</code> function. Using <code>with()</code> dispenses with the need for the <code>$</code> operator, and allows us to call objects within a dataframe without specifying the name of the dataframe every time.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(
+     trees,
+     <span class="kw">plot</span>(
+          <span class="dt">x =</span> Girth,
+          <span class="dt">y =</span> Height
+          )
+     )</code></pre></div>
+<p><img src="Getting_started_with_R_files/figure-html/Scatterplots-3-1.png" width="672" /></p>
+<p>It doesn’t really matter which method you use in this example, but it is useful to revise different ways of getting at data within a dataframe</p>
+<p>This plot is not particularly inspiring, so let’s look at some of the ways we can make it nicer.</p>
+<p>Within the <code>plot</code> command, there are a number of arguments that we can change in order to alter the appearance of the plot, these are <a href="plot_arguments.html">here</a>, lifted from the help file for <code>?plot</code>. You can get a similar list of arguments for any of the other plot functions (or indeed any function) by calling up the help file for that function (just place a “?” in front of the function: e.g. <code>?boxplot</code>).</p>
+<div id="point-colour-and-shape" class="section level3">
+<h3><span class="header-section-number">7.0.1</span> Point colour and shape</h3>
+<p>So lets change some general things first. We’ll label the axes (<code>xlab</code> or <code>ylab</code>) and change the shape (<code>pch</code>) and colour (<code>col</code>) of the points.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(
+     trees,
+     <span class="kw">plot</span>(
+          <span class="dt">x =</span> Girth,
+          <span class="dt">y =</span> Height,
+          <span class="dt">xlab =</span> <span class="st">&quot;Girth (in)&quot;</span>,
+          <span class="dt">ylab =</span> <span class="st">&quot;Height (ft)&quot;</span>,
+          <span class="dt">pch =</span> <span class="dv">16</span>,
+          <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>
+          )
+     )</code></pre></div>
+<p><img src="Getting_started_with_R_files/figure-html/Scatterplots-4-1.png" width="672" /></p>
+<p>A little bit better…</p>
+<p>Note that there a wide range of symbol shapes available…</p>
+<p><a href="http://rgraphics.limnology.wisc.edu/images/miscellaneous/pch.png"><img src="http://rgraphics.limnology.wisc.edu/images/miscellaneous/pch.png" alt="" /></a></p>
+<p>…and pretty much any colour you can imagine. Colours can either be specified as a name (e.g. “red”), as a hexadecimal code (e.g. <code>col = &quot;#FF0000&quot;</code>) or in RGB format (e.g. <code>col = rgb(1, 0, 0)</code>). Try <a href="http://www.colorpicker.com">http://www.colorpicker.com/</a> if you get stuck. Note that unless you are going to pay for colour figures in journal plates, or you can be sure that no colour blind people will read your work, it is good practice to use a combination of colours and symbols</p>
+<p>We can use the package <code>RColorBrewer</code> to make picking complementary colour palettes a little easier. See <code>?RColorBrewer</code> or <a href="http://colorbrewer2.org" class="uri">http://colorbrewer2.org</a> for more information. There are a number of palettes for different applications. We will just use the first of them - this palette is good for colouring lines and points, but should be avoided for blocks of colour.</p>
+<p>We can see the various palettes with:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display.brewer.pal</span>(
+     <span class="dt">n =</span> <span class="dv">9</span>,
+     <span class="dt">name =</span> <span class="st">&quot;Set1&quot;</span>
+     ) </code></pre></div>
+<p><img src="Getting_started_with_R_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p>And create our palette with:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pal &lt;-<span class="st"> </span><span class="kw">brewer.pal</span>(
+     <span class="dt">n =</span> <span class="dv">9</span>,
+     <span class="dt">name =</span> <span class="st">&quot;Set1&quot;</span>
+     )</code></pre></div>
+<p>Note that <code>RColorBrewer</code> specifies colours with hexadecimals:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pal</code></pre></div>
+<pre><code>## [1] &quot;#E41A1C&quot; &quot;#377EB8&quot; &quot;#4DAF4A&quot; &quot;#984EA3&quot; &quot;#FF7F00&quot; &quot;#FFFF33&quot; &quot;#A65628&quot;
+## [8] &quot;#F781BF&quot; &quot;#999999&quot;</code></pre>
+</div>
+<div id="axes-and-outlines" class="section level3">
+<h3><span class="header-section-number">7.0.2</span> Axes and outlines</h3>
+<p>We are also able to customise the axes in any way we want, but it is usually necessary to remove the axes altogether with <code>xaxt=&quot;n&quot;</code> and/or <code>yaxt=&quot;n&quot;</code> and replace them with the <code>axis</code> command.</p>
+<p>This example also demonstrates the use of the <code>bty</code> argument.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(
+     trees,
+     <span class="kw">plot</span>(
+          <span class="dt">x =</span> Girth,
+          <span class="dt">y =</span> Height,
+          <span class="dt">xlab =</span> <span class="st">&quot;Girth (in)&quot;</span>,
+          <span class="dt">ylab =</span> <span class="st">&quot;Height (ft)&quot;</span>,
+          <span class="dt">pch =</span> <span class="dv">16</span>,
+          <span class="dt">col =</span> pal[<span class="dv">2</span>],         <span class="co"># second colour from the palette we produced.</span>
+          <span class="dt">yaxt =</span> <span class="st">&quot;n&quot;</span>,           <span class="co"># remove the y axis</span>
+          <span class="dt">xaxt =</span> <span class="st">&quot;n&quot;</span>,           <span class="co"># remove the y axis</span>
+          <span class="dt">cex.lab =</span> <span class="fl">1.2</span>,      <span class="co"># scaling factor relating to the size of axis titles.</span>
+          <span class="dt">cex =</span> <span class="fl">1.4</span>,          <span class="co"># scaling factor for the size of points</span>
+          <span class="dt">bty =</span> <span class="st">&quot;l&quot;</span>             <span class="co"># this can be either &quot;o&quot;, &quot;l&quot; or &quot;u&quot;</span>
+          )                   <span class="co"># and affects the box bordering the plot</span>
+     )
+
+<span class="kw">axis</span>(
+     <span class="dt">side =</span> <span class="dv">1</span>,           <span class="co"># 1=below, 2=left, 3=above and 4=right.</span>
+     <span class="dt">at =</span> <span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">20</span>,<span class="dv">4</span>),   <span class="co"># a sequence denoting the location of axis tick marks</span>
+     <span class="dt">cex.axis =</span> <span class="fl">1.2</span>      <span class="co"># a scaling factor of the default text size</span>
+     )
+<span class="kw">axis</span>(
+     <span class="dt">side =</span> <span class="dv">2</span>, 
+     <span class="dt">at =</span> <span class="kw">seq</span>(<span class="dv">50</span>,<span class="dv">100</span>,<span class="dv">5</span>), 
+     <span class="dt">las =</span> <span class="dv">2</span>,            <span class="co"># Rotate axis labels</span>
+     <span class="dt">cex.axis =</span> <span class="fl">1.2</span>
+     )</code></pre></div>
+<p><img src="Getting_started_with_R_files/figure-html/Scatterplots-5-1.png" width="672" /></p>
+</div>
+<div id="additional-observations" class="section level3">
+<h3><span class="header-section-number">7.0.3</span> Additional observations</h3>
+<p>If we want to add additional observations to a plot, it is quite simple. We can use the <code>points</code> command, which is specified in a very similar way to the original <code>plot</code> command.</p>
+<p>In this example, we will use the same <code>trees</code> dataset and plot as the previous example, but we will add a second set of observations which we have simulated using <code>jitter</code>. The <code>jitter</code> command adds a small amount of ‘noise’ to an observation by adding or removing a small amount from it.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Repeat the same code as the last example:</span>
+
+<span class="kw">with</span>(
+     trees,
+     <span class="kw">plot</span>(
+          <span class="dt">x =</span> Girth,
+          <span class="dt">y =</span> Height,
+          <span class="dt">xlab =</span> <span class="st">&quot;Girth (in)&quot;</span>,
+          <span class="dt">ylab =</span> <span class="st">&quot;Height (ft)&quot;</span>,
+          <span class="dt">pch =</span> <span class="dv">16</span>,
+          <span class="dt">col =</span> pal[<span class="dv">2</span>],         <span class="co"># second colour from the palette we produced.</span>
+          <span class="dt">yaxt =</span> <span class="st">&quot;n&quot;</span>,           <span class="co"># remove the y axis</span>
+          <span class="dt">xaxt =</span> <span class="st">&quot;n&quot;</span>,           <span class="co"># remove the y axis</span>
+          <span class="dt">cex.lab =</span> <span class="fl">1.2</span>,      <span class="co"># scaling factor relating to the size of axis titles.</span>
+          <span class="dt">cex =</span> <span class="fl">1.4</span>,          <span class="co"># scaling factor for the size of points</span>
+          <span class="dt">bty =</span> <span class="st">&quot;l&quot;</span>             <span class="co"># this can be either &quot;o&quot;, &quot;l&quot; or &quot;u&quot;</span>
+          )                   <span class="co"># and affects the box bordering the plot</span>
+     )
+
+<span class="kw">axis</span>(
+     <span class="dt">side =</span> <span class="dv">1</span>,           <span class="co"># 1=below, 2=left, 3=above and 4=right.</span>
+     <span class="dt">at =</span> <span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">20</span>,<span class="dv">4</span>),   <span class="co"># a sequence denoting the location of axis tick marks</span>
+     <span class="dt">cex.axis =</span> <span class="fl">1.2</span>      <span class="co"># a scaling factor of the default text size</span>
+     )
+<span class="kw">axis</span>(
+     <span class="dt">side =</span> <span class="dv">2</span>, 
+     <span class="dt">at =</span> <span class="kw">seq</span>(<span class="dv">50</span>,<span class="dv">100</span>,<span class="dv">5</span>), 
+     <span class="dt">las =</span> <span class="dv">2</span>,            <span class="co"># Rotate axis labels</span>
+     <span class="dt">cex.axis =</span> <span class="fl">1.2</span>
+     )
+
+<span class="co"># Add an additonal set of points:</span>
+
+<span class="kw">with</span>(
+     trees,
+     <span class="kw">points</span>(
+          <span class="dt">x =</span> <span class="kw">jitter</span>(Girth, <span class="dt">amount=</span><span class="dv">2</span>),       <span class="co"># See ?jitter for details</span>
+          <span class="dt">y =</span> <span class="kw">jitter</span>(Height, <span class="dt">amount =</span> <span class="dv">2</span>),
+          <span class="dt">pch =</span> <span class="dv">15</span>,
+          <span class="dt">col =</span> pal[<span class="dv">1</span>],
+          <span class="dt">cex =</span> <span class="fl">1.4</span>
+          )
+     )
+
+<span class="co"># We also now need to add a legend:</span>
+
+<span class="kw">legend</span>(
+     <span class="st">&quot;bottomright&quot;</span>,      <span class="co"># this can also take the form of x and y coordinates</span>
+     <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;Jittered&quot;</span>,<span class="st">&quot;Original&quot;</span>), <span class="co"># labels for the legend</span>
+     <span class="dt">col =</span> pal[<span class="dv">1</span>:<span class="dv">2</span>],     <span class="co"># colour in order of appearance</span>
+     <span class="dt">pch =</span> <span class="kw">c</span>(<span class="dv">15</span>:<span class="dv">16</span>),     <span class="co"># pch in order of appearance</span>
+     <span class="dt">pt.cex =</span> <span class="fl">1.4</span>,       <span class="co"># size of legend points</span>
+     <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>             <span class="co"># remove the black outline from the legend</span>
+     )</code></pre></div>
+<p><img src="Getting_started_with_R_files/figure-html/Scatterplots-6-1.png" width="672" /></p>
+<p>Note that in the above example we would need to adjust the limits of the x and y axes in order to accommodate all of the extra points which we added. This can be done with the arguments <code>xlim=c(1,2)</code> or <code>ylim=c(1,2)</code>, substituting the lowest and highest numbers for the 1 and 2.</p>
+</div>
+<div id="log-transformations" class="section level3">
+<h3><span class="header-section-number">7.0.4</span> Log transformations</h3>
+<p>It is sometimes necessary to transform your data when plotting. This is quite easy to achieve in R.</p>
+<p>In this example, we will import directly from an online text file (also from Crawley’s R book).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sapdecay &lt;-<span class="st"> </span><span class="kw">read.table</span>(
+     <span class="st">&quot;http://www.bio.ic.ac.uk/research/mjcraw/therbook/data/sapdecay.txt&quot;</span>, 
+     <span class="dt">header =</span> T
+     )</code></pre></div>
+<p>We’ll call the data to examine it. Note this data is dealt with on p70 of ‘The R Book’. remember that typing the name of the object <code>sapdecay</code> is the ‘short-hand’ equivalent of typing <code>print(sapdecay)</code> - there are certain occasions when it will be necessary to use the full command - more of that later.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sapdecay</code></pre></div>
+<pre><code>##     x          y
+## 1   0 1.00000000
+## 2   2 0.96023540
+## 3   4 0.84466377
+## 4   6 0.70693633
+## 5   8 0.70864140
+## 6  10 0.60979536
+## 7  12 0.51325264
+## 8  14 0.47139969
+## 9  16 0.38408127
+## 10 18 0.37227780
+## 11 20 0.33408743
+## 12 22 0.27330733
+## 13 24 0.25162333
+## 14 26 0.22278651
+## 15 28 0.21021653
+## 16 30 0.19059182
+## 17 32 0.16690720
+## 18 34 0.14073164
+## 19 36 0.12028785
+## 20 38 0.11646071
+## 21 40 0.09273687
+## 22 42 0.08397261
+## 23 44 0.08829140
+## 24 46 0.07179059
+## 25 48 0.05932741
+## 26 50 0.06170623</code></pre>
+<div class="ex">
+<h3 id="exercise-1"><span class="header-section-number">7.0.4</span> Exercise</h3>
+<p>Now plot the data producing the graph below. Remember to check the arguments listed above if you don’t know how to do something.</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(
+  <span class="dt">x =</span> sapdecay$x,
+  <span class="dt">y =</span> sapdecay$y,
+  <span class="dt">bty =</span> <span class="st">&quot;l&quot;</span>,
+  <span class="dt">ylab =</span> <span class="st">&quot;Radioactive decay&quot;</span>,
+  <span class="dt">xlab =</span> <span class="st">&quot;Days&quot;</span>,
+  <span class="dt">main =</span> <span class="st">&quot;Radioactive Decay Plot&quot;</span>,
+  <span class="dt">col =</span> pal[<span class="dv">2</span>],
+  <span class="dt">pch =</span> <span class="dv">1</span>,
+  <span class="dt">cex =</span> <span class="fl">1.4</span>,
+  <span class="dt">cex.axis =</span> <span class="fl">1.2</span>,
+  <span class="dt">cex.lab =</span> <span class="fl">1.2</span>
+)</code></pre></div>
+<p><img src="Getting_started_with_R_files/figure-html/Scatterplots-7-1.png" width="672" /></p>
+<p>It is possible for us to fit a non-linear model to this data. We’re not going to cover non-linear modelling in this material, but it is covered elsewhere in the R book.</p>
+<p>The code below (.70 in the R book) fits an exponential model to this data</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lines</span>(
+  <span class="dt">x =</span> xv,
+  <span class="dt">y =</span> <span class="kw">exp</span>(-<span class="fl">0.055</span>*xv)
+)</code></pre></div>
+<p><img src="Getting_started_with_R_files/figure-html/Scatterplots-8-1.png" width="672" /></p>
+<p>In general however, it is easier if we can linearise our data somehow. For plots, this can be achieved in two ways in R. Either we add the command <code>log=&quot;x&quot;</code> to convert the x-axis to a base 10 logarithmic scale (or you can specify <code>&quot;y&quot;</code> or <code>&quot;xy&quot;</code> for both), or we can convert the data itself before plotting using the <code>log10()</code> command.</p>
+<div class="ex">
+<h3 id="exercise-2"><span class="header-section-number">7.0.4</span> Exercise</h3>
+<p>Reproduce the above graph again, but this time try specifying <code>log=&quot;y&quot;</code>.Then try by converting <code>y</code> to a logarithmic scale with <code>log10(y)</code>. You should produce the two plots below:</p>
+</div>
+<p><img src="Getting_started_with_R_files/figure-html/Scatterplots-9-1.png" width="1152" /></p>
+<p>Notice that when we log the axes rather than the data, the axis labels remain a lot more comprehensible.</p>
+<p>We are now able to fit a linear model to this data, which is mathematically simpler than specifying a non-linear model.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">abline</span>(
+  <span class="kw">lm</span>(
+    <span class="dt">formula =</span> <span class="kw">log10</span>(y)~x, 
+    <span class="dt">data =</span> sapdecay
+  )
+)</code></pre></div>
+<p><img src="Getting_started_with_R_files/figure-html/Scatterplots-10-1.png" width="672" /></p>
+</div>
+<div id="customising-white-space" class="section level3">
+<h3><span class="header-section-number">7.0.5</span> Customising white space</h3>
+<p>So by now, you may be realising that pretty much everything in R plots can be customised. This includes the amount of whitespace you leave around your plots. This can very useful to change when you are creating two plots next to each other.</p>
+<p>I’m not going to dwell on how to do this, because there are already some excellent guides written on the internet (see: <a href="http://research.stowers-institute.org/efg/R/Graphics/Basics/mar-oma/" class="uri">http://research.stowers-institute.org/efg/R/Graphics/Basics/mar-oma/</a>).</p>
+<p>One of the plots from this page is included below, showing which commands control whitespace around a plot. Maybe take a deep breath first before looking at the code on the website!</p>
+<p><img src="Getting_started_with_R_files/figure-html/Scatterplots-11-1.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="selecting-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="histograms-and-box-and-whisker-plots.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/06-scatterplots.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
